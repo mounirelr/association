@@ -1,0 +1,121 @@
+
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2d2d2d;
+  }
+  
+  
+  .discussion-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+    border-left: 6px solid #3498db;
+  }
+  
+  .discussion-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+  }
+  
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+  
+  
+  .btn {
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.45rem 0.8rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .btn-primary {
+    background-color: #3498db;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3498db;
+    transform: scale(1.02);
+  }
+  
+  .btn-success {
+    background-color: #7ed957;
+    border: none;
+  }
+  
+  .btn-success:hover {
+    background-color: #059669;
+    transform: scale(1.02);
+  }
+  
+  .btn-outline-primary {
+    color: #7ed957;
+    border: 1px solid #7ed957;
+    background-color: transparent;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #7ed957;
+    color: #ffffff;
+    transform: scale(1.02);
+  }
+  
+  
+  .messages-section {
+    margin-top: 1rem;
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+  }
+  
+  
+  .message {
+    background-color: #e0e7ff;
+    border-left: 4px solid #7ed957;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 0.7rem;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+  }
+  
+  .message:hover {
+    background-color: #c7d2fe;
+  }
+  
+  
+  .add-message-form textarea {
+    resize: none;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+  }
+  
+  .add-message-form textarea:focus {
+    outline: none;
+    border-color: #7ed957;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+  }
+  
+  .add-message-form button {
+    margin-top: 0.5rem;
+  }
+  

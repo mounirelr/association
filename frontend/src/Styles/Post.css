@@ -1,0 +1,64 @@
+.post-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    padding: 16px;
+    margin: 16px;
+    max-width: 600px;
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .post-content h3 {
+    margin: 8px 0;
+    color: #2c3e50;
+  }
+  
+  .post-content p {
+    color: #555;
+  }
+  
+  .post-image {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  .post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  
+  .post-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .like-btn {
+    background-color: #7ed957;
+    color: white;
+  }
+  
+  .comment-btn {
+    background-color: #3498db;
+    color: white;
+  }
+  
