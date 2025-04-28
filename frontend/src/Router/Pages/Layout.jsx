@@ -56,7 +56,7 @@ export default  function Layout(){
             </li>
 
             <li>
-            <Link to="/Membre" >
+            <Link to="/members" >
                     <i className="fa-regular fa-circle-user"></i>
                 <span>Membre</span>
             </Link>
