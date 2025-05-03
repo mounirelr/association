@@ -9,10 +9,8 @@ export const DataProvider = ({children})=>{
     const [usersList,setUserList] = useState([])
 
 
-    const getUsers =  async()=>{
-         await fetch("http://localhost:8080/users")
-        .then(response=>response.json())
-        .then(response=>setUserList(response))
+    const getUsers =  ()=>{
+         
     }
 
     useEffect(()=>{

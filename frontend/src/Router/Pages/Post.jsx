@@ -2,6 +2,7 @@ import "../../Styles/Post.css"
 import { useEffect,useState } from "react"
 import PostCard from "../../Components/PostCard"
 import { useOutletContext } from "react-router-dom";
+import CreatePostCard from "../../Components/CreatePostCard";
 
 export default  function Post(){
   const { inputSearch } = useOutletContext();
@@ -59,6 +60,7 @@ export default  function Post(){
 
   return <>
 {console.log(inputSearch)}
+<CreatePostCard />
   {displayPost()}
   </>
     

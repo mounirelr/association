@@ -1,17 +1,24 @@
 
 import MemberComp from "../../Components/MemberComp"
-import {useData} from "../../DataContext"
 import { useOutletContext } from "react-router-dom";
 import "../../Styles/memberTable.css"
+import { useEffect, useState } from "react";
 
 export default function  Members(){
     const { inputSearch } = useOutletContext();
-    const [ members, setMembers ,getUsers] = useData();
+    const [ membersList, setMembersList] = useState([]);
+
+
+    const fetchMembers =  async()=>{
+        await fetch("http://localhost:8080/users")
+        .then(response=>response.json())
+        .then(response=>setMembersList(response))
+    }
 
 
     const displayMembers = ()=>{
 
-        const memberToDisplay = members.filter(member=>{
+        const memberToDisplay = membersList.filter(member=>{
             return member.firstName.toLowerCase().includes(inputSearch.toLowerCase()) || member.lastName.toLowerCase().includes(inputSearch.toLowerCase())
         })
 
@@ -31,8 +38,8 @@ export default function  Members(){
           if(response.status===200){
             
 
-                const newMemberList = members.filter(e=>e.id !== idMember )
-                setMembers(newMemberList)
+                const newMemberList = membersList.filter(e=>e.id !== idMember )
+                setMembersList(newMemberList)
             }
             else if(response.status===404){
                 console.log("Member Not Found Not Found");
@@ -54,7 +61,7 @@ export default function  Members(){
                 method:"PATCH",
             });
             if(response.status===200){
-                getUsers()
+                fetchMembers()
             }
             else if(response.status===404){
                 console.log("Member Not Found Not Found");
@@ -68,8 +75,14 @@ export default function  Members(){
          }
 
 
+
+         useEffect(()=>{
+            fetchMembers()
+         },[])
+
+
     return <>
-    {console.log(members)}
+    {console.log(membersList)}
     <table >
     <thead >
 
