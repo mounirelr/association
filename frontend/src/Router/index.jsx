@@ -7,6 +7,7 @@ import Evenement from "./Pages/Evenement";
 import  Members from "./Pages/Members";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
+import PrivateRoute from "../PrivateRoute";
 
 
 
@@ -42,7 +43,9 @@ export const router = createBrowserRouter([
 
         {
             path: '/members',
-            element : <Members />
+            element : <PrivateRoute>
+                  <Members />
+            </PrivateRoute> 
         },
 
         {

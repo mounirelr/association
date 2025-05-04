@@ -93,7 +93,7 @@ export default  function Layout(){
             <span></span>
             <SearchBar filterSearch={filterSearch} />
             <div className="userInfo">
-                <span><i className="fa-regular fa-user"></i></span>
+                <span>Mounir EL  <i className="fa-regular fa-user"></i></span>
                 
             </div>
         </div>

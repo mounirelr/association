@@ -1,6 +1,7 @@
 package ma.association.service;
 
 import ma.association.DTO.LoginRequest;
+import ma.association.DTO.UserDTO;
 import ma.association.exception.UserNotFoundException;
 import ma.association.model.User;
 import ma.association.repository.UserRepository;
@@ -10,7 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -63,19 +67,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<String> authenticateUser(LoginRequest loginRequest){
-        User user =userRepository.findByEmail(loginRequest.getEmail());
-        if(user==null){
-            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+    public ResponseEntity<Map<String, Object>> authenticateUser(LoginRequest loginRequest) {
+        User user = userRepository.findByEmail(loginRequest.getEmail());
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "Invalid email or password"));
         }
 
-        else if(!passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())){
-           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
-        else if(user.getStatus().equals("Inactive")){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("L'accès à votre compte a été temporairement bloqué");
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "Invalid email or password"));
         }
 
-        return ResponseEntity.ok("User authenticated successfully");
+        if ("Inactive".equals(user.getStatus())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "L'accès à votre compte a été temporairement bloqué"));
+        }
+
+        UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName());
+        Map<String, Object> response = new HashMap<>();
+        response.put("userDetails", userDTO);
+        response.put("message", "User authenticated successfully");
+
+        return ResponseEntity.ok(response);
     }
+
 }

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 
 const DataContext = createContext();
@@ -6,18 +6,19 @@ const DataContext = createContext();
 export const useData = ()=>useContext(DataContext);
 
 export const DataProvider = ({children})=>{
-    const [usersList,setUserList] = useState([])
+    const [userLogin,setUserLogin] = useState(null)
 
+    const loginUser = (userData)=>{
+        setUserLogin(useData)
 
-    const getUsers =  ()=>{
-         
     }
 
-    useEffect(()=>{
-        getUsers()
-    },[])
 
-    return <DataContext.Provider value={[usersList,setUserList,getUsers]}>
+   
+
+    
+
+    return <DataContext.Provider value={[userLogin,setUserLogin,loginUser]}>
         {children}
     </DataContext.Provider>
 }

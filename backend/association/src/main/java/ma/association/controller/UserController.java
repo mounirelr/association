@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+    ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest loginRequest){
         return userService.authenticateUser(loginRequest);
     }
 

@@ -4,9 +4,13 @@ import { useOutletContext } from "react-router-dom";
 import "../../Styles/memberTable.css"
 import { useEffect, useState } from "react";
 
+
 export default function  Members(){
+    
     const { inputSearch } = useOutletContext();
+   
     const [ membersList, setMembersList] = useState([]);
+    
 
 
     const fetchMembers =  async()=>{

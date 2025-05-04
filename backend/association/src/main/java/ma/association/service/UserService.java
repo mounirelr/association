@@ -6,6 +6,7 @@ import ma.association.model.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     User getUserById(Long id);
@@ -13,5 +14,5 @@ public interface UserService {
      ResponseEntity<String> newUser(User newUser );
     String deleteUser( Long id);
     String blockUser( Long id);
-    ResponseEntity<String> authenticateUser(LoginRequest loginRequest);
+    ResponseEntity<Map<String, Object>> authenticateUser(LoginRequest loginRequest);
 }

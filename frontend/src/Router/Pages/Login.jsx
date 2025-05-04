@@ -4,7 +4,11 @@
 import { useRef , useState} from "react";
 
 
+
     export default function Login(){
+
+        
+    
     const navigate = useNavigate()
     const emailInput = useRef()
     const passwordInput = useRef()
@@ -14,6 +18,7 @@ import { useRef , useState} from "react";
         e.preventDefault()
         const email = emailInput.current.value
         const password = passwordInput.current.value
+        const userDetails = {"email" :email , "password" :password}
 
         try{
             const response =  await fetch("http://localhost:8080/login",{
@@ -21,11 +26,15 @@ import { useRef , useState} from "react";
                 headers :{
                     "Content-Type" :"application/json"
                 },
-                body : JSON.stringify({"email" :email , "password" :password})
+                body : JSON.stringify(userDetails)
             });
-            if(response.status===200){
-                navigate("/members")
-            }
+                if(response.status===200){
+                    
+                    const data = await  response.json()
+                console.log(data.userDetails)
+                localStorage.setItem("connectedUser",data.userDetails)
+                    navigate("/members")
+                }
             else if(response.status===401) {
                 
                setErrors(await response.text())
