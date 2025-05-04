@@ -1,5 +1,6 @@
 package ma.association.controller;
 
+import ma.association.DTO.LoginRequest;
 import ma.association.model.User;
 import ma.association.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/register")
     ResponseEntity<String> newUser(@RequestBody User newUser ){
         return userService.newUser(newUser);
     }
@@ -34,6 +35,11 @@ public class UserController {
         return userService.blockUser(id);
 
 
+    }
+
+    @PostMapping("/login")
+    ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+        return userService.authenticateUser(loginRequest);
     }
 
 }

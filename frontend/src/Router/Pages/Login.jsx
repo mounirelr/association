@@ -1,24 +1,65 @@
 
-    import { useNavigate } from "react-router-dom";
+    import { useNavigate, Link } from "react-router-dom";
+    import "../../Styles/login.css"
+import { useRef , useState} from "react";
 
 
     export default function Login(){
+    const navigate = useNavigate()
+    const emailInput = useRef()
+    const passwordInput = useRef()
+    const [errors,setErrors] =useState()
+        
+    const handleSubmitLogin = async  (e)=>{
+        e.preventDefault()
+        const email = emailInput.current.value
+        const password = passwordInput.current.value
 
-        const navigate = useNavigate();
-        const handleLogin = (e)=>{
-            e.preventDefault()
-
-            navigate('/app');
-
+        try{
+            const response =  await fetch("http://localhost:8080/login",{
+                method:"POST",
+                headers :{
+                    "Content-Type" :"application/json"
+                },
+                body : JSON.stringify({"email" :email , "password" :password})
+            });
+            if(response.status===200){
+                navigate("/members")
+            }
+            else if(response.status===401) {
+                
+               setErrors(await response.text())
+            }
+        }catch(error){
+            console.log(error)
         }
 
+    }
 
-        return <form action="">
-
-            <label >Email</label>
-            <input type="text" name="" id="" />
-            <label >Password</label>
-            <input type="text" name="" id="" />
-            <input onClick={handleLogin} type="submit" value="login" />
-        </form>
+        return <div className="loginBase">
+        <div className="login-container">
+          <div className="login-card">
+            <h2>Login</h2>
+            <div className="login-error-message">
+             {errors && errors}
+            </div>
+            <form>
+              <div className="login-form-row">
+                <input type="email"  placeholder="Email" required ref={emailInput}/>
+              </div>
+      
+              <div className="login-form-row">
+                <input type="password" placeholder="Password" required  ref={passwordInput}/>
+              </div>
+      
+              <button onClick={handleSubmitLogin}  type="submit">Login</button>
+            </form>
+      
+            <p className="register-link">
+              Don't have an account? <Link to="/register">Register here</Link>
+            </p>
+          </div>
+        </div>
+      </div>
+      
     }

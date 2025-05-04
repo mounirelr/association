@@ -33,6 +33,10 @@ export default function  Members(){
 
           const response = await  fetch(`http://localhost:8080/user/${idMember}`,{
             method:"DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+           
           });
 
           if(response.status===200){
@@ -59,6 +63,7 @@ export default function  Members(){
         try{
             const response = await fetch(`http://localhost:8080/user/${idMember}`,{
                 method:"PATCH",
+               
             });
             if(response.status===200){
                 fetchMembers()

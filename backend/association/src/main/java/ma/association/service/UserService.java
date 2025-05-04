@@ -1,6 +1,7 @@
 package ma.association.service;
 
 
+import ma.association.DTO.LoginRequest;
 import ma.association.model.User;
 import org.springframework.http.ResponseEntity;
 
@@ -12,4 +13,5 @@ public interface UserService {
      ResponseEntity<String> newUser(User newUser );
     String deleteUser( Long id);
     String blockUser( Long id);
+    ResponseEntity<String> authenticateUser(LoginRequest loginRequest);
 }

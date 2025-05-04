@@ -32,11 +32,14 @@ export default function Register(){
         "lastName" :lastName,
         "phone" :phone,
         "email" :email,
-        "password" :password
+        "password" :password,
+        "role" :"Member",
+        "status" :"Active"
+        
        }
 
        try{
-        const response = await fetch('http://localhost:8080/user',{
+        const response = await fetch('http://localhost:8080/register',{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

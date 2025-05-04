@@ -1,9 +1,11 @@
 package ma.association.service;
 
+import ma.association.DTO.LoginRequest;
 import ma.association.exception.UserNotFoundException;
 import ma.association.model.User;
 import ma.association.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> newUser(User newUser) {
 
-        if(userRepository.existsByEmail(newUser.getEmail())){
+        if(userRepository.existsByEmail(newUser.getEmail()) ){
             ResponseEntity.badRequest().body("Email already exists");
         }
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
@@ -58,5 +60,22 @@ public class UserServiceImpl implements UserService {
             user.setStatus("Inactive");
         userRepository.save(user);
         return "User status changed";
+    }
+
+    @Override
+    public ResponseEntity<String> authenticateUser(LoginRequest loginRequest){
+        User user =userRepository.findByEmail(loginRequest.getEmail());
+        if(user==null){
+            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+
+        else if(!passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())){
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+        else if(user.getStatus().equals("Inactive")){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("L'accès à votre compte a été temporairement bloqué");
+        }
+
+        return ResponseEntity.ok("User authenticated successfully");
     }
 }

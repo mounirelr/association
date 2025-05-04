@@ -6,6 +6,7 @@ import  NotFound from "./Pages/NotFound"
 import Evenement from "./Pages/Evenement";
 import  Members from "./Pages/Members";
 import Register from "./Pages/Register";
+import Login from "./Pages/Login";
 
 
 
@@ -17,11 +18,11 @@ export const router = createBrowserRouter([
 
 {
     path:'/login',
-    element : <HomePage />  
+    element : <Login />  
 },
 
 {
-    path:'/registre',
+    path:'/register',
     element : <Register />  
 },
 
