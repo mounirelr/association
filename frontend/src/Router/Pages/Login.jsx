@@ -36,8 +36,9 @@ import { useRef , useState} from "react";
                     navigate("/members")
                 }
             else if(response.status===401) {
-                
-               setErrors(await response.text())
+              const data =  await response.json()
+                console.log(data.message)
+               setErrors(data.message)
             }
         }catch(error){
             console.log(error)

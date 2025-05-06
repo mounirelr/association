@@ -7,7 +7,7 @@ export default function MemberComp({member,deleteMember ,blockMember}){
         <td>{member.id}</td>
         <td>{member.firstName} {member.lastName}</td>
         <td>{member.email}</td>
-        <td>0679126533</td>
+        <td>{member.phone}</td>
         <td>{member.role}</td>
         <td >{member.status}</td>
         <td>

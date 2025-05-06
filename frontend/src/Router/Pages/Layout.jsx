@@ -1,4 +1,4 @@
-import { Link,Outlet,useLocation  } from "react-router-dom"
+import { Link,Outlet  } from "react-router-dom"
 import {useState} from "react"
 
 import "../../Styles/Layout.css"
@@ -7,14 +7,14 @@ import SearchBar from "../../Components/SearchBar";
 
 
 export default  function Layout(){
-    const location = useLocation().pathname.slice(1);
+   
     const [inputSearch, setInputSearch] = useState("");
 
     const filterSearch = (inputSearch) => {
       setInputSearch(inputSearch);  
     };
 
-    if(location!=="login")
+
     return <>
     <div className="sidebar">
     <div className="logo">
@@ -93,7 +93,7 @@ export default  function Layout(){
             <span></span>
             <SearchBar filterSearch={filterSearch} />
             <div className="userInfo">
-                <span>Mounir EL  <i className="fa-regular fa-user"></i></span>
+                <span><i className="fa-regular fa-user"></i></span>
                 
             </div>
         </div>
@@ -111,8 +111,6 @@ export default  function Layout(){
     </div>
     </> 
 
-    else 
-    return  <>
-     <Outlet />
-    </>
+    
+    
 }
