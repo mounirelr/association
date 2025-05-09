@@ -26,7 +26,8 @@ export default function Register(){
        const passwordVerify = passwordVerifiyInput.current.value
        if(!verifyInput(firstName,lastName,phone,email,password,passwordVerify)){
         console.log("no error")
-       }
+      
+      
        const userData ={
         "firstName" :firstName,
         "lastName" :lastName,
@@ -56,6 +57,8 @@ export default function Register(){
        }catch(error){
         console.log(error)
        }
+       }
+       
 
     }
 
