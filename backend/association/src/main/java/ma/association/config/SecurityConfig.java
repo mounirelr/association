@@ -33,6 +33,7 @@ public class SecurityConfig   {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/users").permitAll()
                         .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/addEvent").permitAll()
                         .anyRequest().authenticated()
         ).httpBasic(Customizer.withDefaults()).build();
     }

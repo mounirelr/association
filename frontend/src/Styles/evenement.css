@@ -1,0 +1,400 @@
+/* Main Container */
+.eventManagement {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Add Event Section */
+  .eventManagement__addSection {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .eventForm {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .eventForm__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    text-align: center;
+    position: relative;
+  }
+  
+  .eventForm__title:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #28a745;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .eventForm__group {
+    margin-bottom: 20px;
+  }
+  
+  .eventForm__row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .eventForm__group--half {
+    flex: 1;
+  }
+  
+  .eventForm__label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 14px;
+  }
+  
+  .eventForm__input,
+  .eventForm__textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+  }
+  
+  .eventForm__input:focus,
+  .eventForm__textarea:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+  }
+  
+  .eventForm__textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .eventForm__fileUpload {
+    position: relative;
+  }
+  
+  .eventForm__fileLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .eventForm__fileButton {
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px 0 0 8px;
+    font-size: 14px;
+    color: #2c3e50;
+    transition: all 0.2s;
+  }
+  
+  .eventForm__fileButton:hover {
+    background-color: #e9ecef;
+  }
+  
+  .eventForm__fileName {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #dfe6e9;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #7f8c8d;
+    background-color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .eventForm__fileInput {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .eventForm__submit {
+    width: 100%;
+    padding: 14px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .eventForm__submit:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  }
+  
+  .eventForm__submitIcon {
+    font-size: 20px;
+  }
+  
+  /* Event List Section */
+  .eventManagement__listSection {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .sectionHeader__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+  }
+  
+  .filterSelect {
+    padding: 8px 12px;
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .filterSelect:focus {
+    outline: none;
+    border-color: #28a745;
+  }
+  
+  /* Event Grid */
+  .eventGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  /* Event Card */
+  .eventCard {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  .eventCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .eventCard__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1;
+  }
+  
+  .eventCard__image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .eventCard__content {
+    padding: 20px;
+  }
+  
+  .eventCard__date {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .eventCard__date:before {
+    content: '📅';
+    margin-right: 6px;
+  }
+  
+  .eventCard__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+  
+  .eventCard__description {
+    font-size: 14px;
+    color: #576574;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .eventCard__meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #dfe6e9;
+  }
+  
+  .eventCard__location:before {
+    content: '📍';
+    margin-right: 5px;
+  }
+  
+  .eventCard__spots:before {
+    content: '👥';
+    margin-right: 5px;
+  }
+  
+  .eventCard__buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .eventCard__button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .eventCard__button--register {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .eventCard__button--register:hover {
+    background-color: #218838;
+  }
+  
+  .eventCard__button--more {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+  }
+  
+  .eventCard__button--more:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .eventForm__row {
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .sectionHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .eventGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+
+
+  /* Add Event Button Styles */
+.eventForm__toggleButton {
+    background-color: #7ed957;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    margin: 20px 0;
+}
+
+.eventForm__toggleButton:hover {
+    background-color: #6ac74a;
+    transform: translateY(-1px);
+}
+
+.eventForm__toggleButton span {
+    font-size: 1.2rem;
+}
+
+/* Form Header */
+.eventForm__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.eventForm__closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #65676B;
+    padding: 5px;
+}
+
+.eventForm__closeButton:hover {
+    color: #050505;
+}
+
+/* Animation for form */
+.eventForm {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
