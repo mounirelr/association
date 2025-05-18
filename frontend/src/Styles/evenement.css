@@ -1,4 +1,4 @@
-/* Main Container */
+
 .eventManagement {
     max-width: 1200px;
     margin: 0 auto;
@@ -6,9 +6,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  /* Add Event Section */
+
   .eventManagement__addSection {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    background: white;
     border-radius: 16px;
     padding: 15px;
     margin-bottom: 40px;
@@ -157,7 +157,7 @@
     font-size: 20px;
   }
   
-  /* Event List Section */
+  
   .eventManagement__listSection {
     background-color: #fff;
     border-radius: 16px;
@@ -193,14 +193,14 @@
     border-color: #28a745;
   }
   
-  /* Event Grid */
+ 
   .eventGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
   }
   
-  /* Event Card */
+
   .eventCard {
     border-radius: 12px;
     overflow: hidden;
@@ -321,7 +321,7 @@
     background-color: #e9ecef;
   }
   
-  /* Responsive Adjustments */
+  
   @media (max-width: 768px) {
     .eventForm__row {
       flex-direction: column;
@@ -342,9 +342,9 @@
 
 
 
-  /* Add Event Button Styles */
+  
 .eventForm__toggleButton {
-    background-color: #7ed957;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
@@ -368,7 +368,7 @@
     font-size: 1.2rem;
 }
 
-/* Form Header */
+
 .eventForm__header {
     display: flex;
     justify-content: space-between;
@@ -389,7 +389,7 @@
     color: #050505;
 }
 
-/* Animation for form */
+
 .eventForm {
     animation: fadeIn 0.3s ease;
 }
@@ -397,4 +397,30 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+
+.EventErrors h3{
+    color: red !important;
+    margin-bottom: 15px;
+}
+
+.eventCard__buttonsModerator{
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+.eventCard__buttonDelete{
+    background-color: red;
+}
+
+
+.eventCard__buttonsModerator .eventCard__button--register{
+    background-color: red;
+}
+
+.eventCard__buttonsModerator .eventCard__button--more{
+    background-color: orange;
 }

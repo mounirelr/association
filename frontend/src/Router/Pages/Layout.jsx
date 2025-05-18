@@ -1,5 +1,5 @@
 import { Link,Outlet  } from "react-router-dom"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 
 import "../../Styles/Layout.css"
 import SearchBar from "../../Components/SearchBar";
@@ -10,9 +10,21 @@ export default  function Layout(){
    
     const [inputSearch, setInputSearch] = useState("");
 
+    const [connectedUser,setConnectedUser] =useState({})
+
     const filterSearch = (inputSearch) => {
       setInputSearch(inputSearch);  
     };
+
+    const getConnectedUser = ()=>{
+      const user = JSON.parse(localStorage.getItem("connectedUser"))
+      
+      setConnectedUser(user)
+    }
+
+    useEffect(()=>{
+      getConnectedUser()
+    },[])
 
 
     return <>
@@ -93,7 +105,7 @@ export default  function Layout(){
             <span></span>
             <SearchBar filterSearch={filterSearch} />
             <div className="userInfo">
-                <span><i className="fa-regular fa-user"></i></span>
+                <span>{connectedUser.firstName} {connectedUser.lastName}</span>
                 
             </div>
         </div>

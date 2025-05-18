@@ -34,6 +34,10 @@ public class SecurityConfig   {
                         .requestMatchers("/users").permitAll()
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/addEvent").permitAll()
+                        .requestMatchers("/events").permitAll()
+                        .requestMatchers("updateEvent").permitAll()
+                        .requestMatchers("/deleteEvent/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
                         .anyRequest().authenticated()
         ).httpBasic(Customizer.withDefaults()).build();
     }

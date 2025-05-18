@@ -1,10 +1,12 @@
 package ma.association.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,12 +23,15 @@ public class Evenement {
     private String titre;
     private String description;
     private LocalDate date;
+    private Time heure;
     private String pieceJoint;
+    private String placeAdresse;
+
     private String etat;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "evenement",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Commentaire> commentaires = new ArrayList<>();
+
 }

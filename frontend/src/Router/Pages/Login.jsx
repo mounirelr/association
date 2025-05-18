@@ -32,7 +32,7 @@ import { useRef , useState} from "react";
                     
                     const data = await  response.json()
                 console.log(data.userDetails)
-                localStorage.setItem("connectedUser",data.userDetails)
+                localStorage.setItem("connectedUser",JSON.stringify(data.userDetails))
                     navigate("/members")
                 }
             else if(response.status===401) {
