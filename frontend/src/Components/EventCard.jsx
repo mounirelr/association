@@ -1,6 +1,6 @@
 
 
-export default function eventCard({event ,getEvents,editEventTrigger}){
+export default function eventCard({event ,getEvents,editEventTrigger,displayEventDetails}){
 
     const handleDeleteEvent =  async (e)=>{
         e.preventDefault()
@@ -31,6 +31,14 @@ export default function eventCard({event ,getEvents,editEventTrigger}){
 
     }
 
+    const handlePlusInfo = (e)=>{
+        e.preventDefault()
+        const eventId=e.currentTarget.dataset.id
+        displayEventDetails(eventId)
+
+
+    }
+
 
     return <div className="eventCard">
     {/* <div className="eventCard__badge">Featured</div> */}
@@ -47,7 +55,7 @@ export default function eventCard({event ,getEvents,editEventTrigger}){
       </div>
       <div className="eventCard__buttons">
         <button className="eventCard__button eventCard__button--register">S'inscrire</button>
-        <button className="eventCard__button eventCard__button--more">Plus d'information</button>
+        <button className="eventCard__button eventCard__button--more"   data-id={event.id} onClick={handlePlusInfo}>Plus d'information</button>
       </div>
       <div className="eventCard__buttonsModerator">
         <button className="eventCard__button eventCard__button--register" data-id={event.id} onClick={handleDeleteEvent}>Supprimer</button>

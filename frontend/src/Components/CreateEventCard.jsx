@@ -29,7 +29,7 @@ export default function CreateEventCard({ getEvents, formEdit, editedEvent ,rese
       if(!formEdit){
         try {
             const formData = new FormData();
-            formData.append("id",null)
+           
             formData.append("titre", titleRef.current.value.trim());
             formData.append("description", descriptionRef.current.value.trim());
             formData.append("date", dateRef.current.value);

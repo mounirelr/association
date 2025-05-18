@@ -33,6 +33,7 @@ public class SecurityConfig   {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/users").permitAll()
                         .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/updateUser").permitAll()
                         .requestMatchers("/addEvent").permitAll()
                         .requestMatchers("/events").permitAll()
                         .requestMatchers("updateEvent").permitAll()

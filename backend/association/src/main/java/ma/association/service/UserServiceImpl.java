@@ -84,12 +84,27 @@ public class UserServiceImpl implements UserService {
                     .body(Map.of("message", "L'accès à votre compte a été temporairement bloqué"));
         }
 
-        UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(),user.getRole());
+        UserDTO userDTO = new UserDTO(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(),user.getRole(),user.getPhone());
         Map<String, Object> response = new HashMap<>();
         response.put("userDetails", userDTO);
         response.put("message", "User authenticated successfully");
 
         return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<String> updateUser(User updatedUser){
+        User user = userRepository.findById(updatedUser.getId()).orElse(null);
+        if(user != null){
+            user.setEmail(updatedUser.getEmail());
+            user.setPhone(updatedUser.getPhone());
+            if(updatedUser.getPassword() != null){
+                user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+            }
+            userRepository.save(user);
+            return ResponseEntity.ok("User updated successfully");
+
+        }
+        return  ResponseEntity.notFound().build();
     }
 
 }

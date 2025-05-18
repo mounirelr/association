@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 @Data
 public class EvenementDTO {
+    @Nullable
     private Long id;
     private String titre;
     private String description;
@@ -13,6 +14,6 @@ public class EvenementDTO {
     private String placeAdresse;
     private String etat;
     private Long userId;
-    @Nullable
+
     private MultipartFile pieceJoint;
 }

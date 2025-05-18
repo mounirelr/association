@@ -1,0 +1,70 @@
+.profilContainer{
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    padding: 16px;
+   
+    
+}
+
+.profilContainer form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .profilContainer div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profilContainer label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+  }
+  
+  .profilContainer input {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    width: 400px;
+    transition: border 0.3s;
+  }
+  
+  .profilContainer input:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+  }
+
+
+  .profilContainer form button{
+
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+   
+  }
+
+  .readOnly{
+    background-color: lightgray;
+  }
+
+  
+  @media (max-width: 600px) {
+    .profilContainer {
+      padding: 20px;
+    }
+  
+    .profilContainer input {
+      font-size: 14px;
+    }
+  }

@@ -14,5 +14,6 @@ public interface UserService {
      ResponseEntity<String> newUser(User newUser );
     String deleteUser( Long id);
     String blockUser( Long id);
+    ResponseEntity<String> updateUser(User updatedUser);
     ResponseEntity<Map<String, Object>> authenticateUser(LoginRequest loginRequest);
 }

@@ -9,6 +9,7 @@ const inputSearchValue = useRef()
        e.preventDefault()
       const  inputSearch =inputSearchValue.current.value
       
+      inputSearchValue.current.value=""
        filterSearch(inputSearch)
     }
 

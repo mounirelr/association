@@ -43,4 +43,9 @@ public class UserController {
         return userService.authenticateUser(loginRequest);
     }
 
+    @PatchMapping("/updateUser")
+    ResponseEntity<String> updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
 }
