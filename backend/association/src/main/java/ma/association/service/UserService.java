@@ -12,8 +12,10 @@ public interface UserService {
     User getUserById(Long id);
     List<User> getUsers();
      ResponseEntity<String> newUser(User newUser );
-    String deleteUser( Long id);
+    ResponseEntity<String> deleteUser( Long id);
     String blockUser( Long id);
     ResponseEntity<String> updateUser(User updatedUser);
     ResponseEntity<Map<String, Object>> authenticateUser(LoginRequest loginRequest);
+    public ResponseEntity<String> upgradeToModerator(Long id);
+
 }

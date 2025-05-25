@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    String deleteUser(@PathVariable Long id){
+    ResponseEntity<String> deleteUser(@PathVariable Long id){
          return userService.deleteUser(id);
     }
 
@@ -43,9 +43,16 @@ public class UserController {
         return userService.authenticateUser(loginRequest);
     }
 
-    @PatchMapping("/updateUser")
+    @PatchMapping("/updateUser/{id}")
+    ResponseEntity<String> updateUser(@PathVariable Long id){
+        return userService.upgradeToModerator(id);
+    }
+
+    @PatchMapping("/upgradeUser")
     ResponseEntity<String> updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
+
+
 
 }

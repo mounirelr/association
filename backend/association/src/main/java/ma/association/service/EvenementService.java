@@ -1,6 +1,7 @@
 package ma.association.service;
 
 import ma.association.DTO.EvenementDTO;
+import ma.association.DTO.EventParticipants;
 import ma.association.model.Evenement;
 import ma.association.model.User;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +15,7 @@ public interface EvenementService {
     ResponseEntity<String> addEvenement(Evenement evenement);
     ResponseEntity<String> updateEvenement(EvenementDTO evenementDTO);
     ResponseEntity<String> deleteEvenement(Long id);
+     ResponseEntity<String> registerMemberToEvent(Long eventId,Long memberId);
+     ResponseEntity<List<EventParticipants>> getEventParticipants(Long eventId);
 
 }

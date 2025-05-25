@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor @AllArgsConstructor
@@ -23,5 +26,18 @@ public class User {
     private String role;
 
     private String status;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Evenement> ownedEvents = new ArrayList<>();
+
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "event_participants",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Evenement> participatingEvents = new ArrayList<>();
 
 }

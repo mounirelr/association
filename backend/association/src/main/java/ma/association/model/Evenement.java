@@ -26,12 +26,16 @@ public class Evenement {
     private Time heure;
     private String pieceJoint;
     private String placeAdresse;
-
     private String etat;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    @JsonIgnore
-    private User user;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    @JsonIgnore
+    private User owner;
+
+    @ManyToMany(mappedBy = "participatingEvents")
+    @JsonIgnore
+    private List<User> participants = new ArrayList<>();
 
 }

@@ -5,6 +5,8 @@ export default function CreateEventCard({ getEvents, formEdit, editedEvent ,rese
     const [errorList, setErrorList] = useState([]);
     const [fileName, setFileName] = useState("Aucun fichier sélectionné");
 
+    const [connectedUser,setConnectedUser]=useState([])
+
     const titleRef = useRef();
     const descriptionRef = useRef();
     const dateRef = useRef();
@@ -14,9 +16,16 @@ export default function CreateEventCard({ getEvents, formEdit, editedEvent ,rese
 
     function validateFormData() {
         const errors = [];
-        // Add your validations here
+       
         return errors;
     }
+
+    const getConnectedUser=()=>{
+        const user = JSON.parse(localStorage.getItem("connectedUser"));
+        if (user) {
+            setConnectedUser(user);
+    }
+}
 
     const submitFormEvent = async (e) => {
         e.preventDefault();
@@ -36,7 +45,7 @@ export default function CreateEventCard({ getEvents, formEdit, editedEvent ,rese
             formData.append("heure", heureRef.current.value);
             formData.append("placeAdresse", placeAdresseRef.current.value.trim());
             formData.append("etat", "Active");
-            formData.append("userId", 3);
+            formData.append("userId", connectedUser.id);
             if (imageRef.current.files[0]) {
                 formData.append("pieceJoint", imageRef.current.files[0]);
             }
@@ -127,6 +136,7 @@ export default function CreateEventCard({ getEvents, formEdit, editedEvent ,rese
     };
 
     useEffect(() => {
+        getConnectedUser();
         checkEdit();
     }, [formEdit]);
 

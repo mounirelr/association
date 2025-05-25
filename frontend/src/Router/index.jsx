@@ -30,7 +30,9 @@ export const router = createBrowserRouter([
 
 
 {
-    element:< Layout/>,
+    element: <PrivateRoute>
+         < Layout/>
+         </PrivateRoute> ,
     children: [
         {
             path: '/post',
@@ -39,7 +41,9 @@ export const router = createBrowserRouter([
 
         {
             path: '/evenement',
-            element : <Evenement />
+            element :  <PrivateRoute> 
+                <Evenement />
+                </PrivateRoute> 
         },
 
         {

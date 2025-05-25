@@ -1,6 +1,10 @@
 
-export default function MemberComp({member,deleteMember ,blockMember}){
+export default function MemberComp({member,deleteMember ,blockMember,upgradeMember}){
 
+
+    
+    
+      
     
 
     return <tr>
@@ -12,7 +16,7 @@ export default function MemberComp({member,deleteMember ,blockMember}){
         <td >{member.status}</td>
         <td>
             <button data-id={member.id} onClick={blockMember}>{member.status==="Active" ?"Bloquer" :"Debloquer"}</button>
-            <button data-id={member.id}>Editer</button>
+            <button  data-id={member.id} onClick={upgradeMember}>{member.role==="Moderateur" ? "Memebre" :"Moderateur"}</button>
             <button data-id={member.id} onClick={deleteMember}>Supprimer</button>
         </td>
     </tr>

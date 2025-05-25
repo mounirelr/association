@@ -1,70 +1,123 @@
-.profilContainer{
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    padding: 16px;
-   
-    
-}
-
-.profilContainer form {
+.profile-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .profile-header {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
     gap: 20px;
   }
   
-  .profilContainer div {
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .profile-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .profile-info {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin-bottom: 30px;
+  }
+  
+  .profile-details h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .profile-details h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #2e7d32;
+  }
+  
+  .info-item {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  .edit-btn {
+    float: right;
+    background-color: #2e7d32;
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-form {
+    margin-top: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
   }
   
-  .profilContainer label {
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #333;
-  }
-  
-  .profilContainer input {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-    width: 400px;
-    transition: border 0.3s;
-  }
-  
-  .profilContainer input:focus {
-    outline: none;
-    border-color: #007bff;
-    background-color: #fff;
-  }
-
-
-  .profilContainer form button{
-
-    background-color: #28a745;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+  .form-group label {
     font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .submit-btn {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-   
   }
+  
+  .cancel-btn {
+    background-color: #aaa;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
 
-  .readOnly{
-    background-color: lightgray;
-  }
 
   
-  @media (max-width: 600px) {
-    .profilContainer {
-      padding: 20px;
-    }
-  
-    .profilContainer input {
-      font-size: 14px;
-    }
-  }

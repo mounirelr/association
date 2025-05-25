@@ -1,6 +1,7 @@
 package ma.association.controller;
 
 import ma.association.DTO.EvenementDTO;
+import ma.association.DTO.EventParticipants;
 import ma.association.model.Evenement;
 import ma.association.repository.UserRepository;
 import ma.association.service.EvenementService;
@@ -66,7 +67,7 @@ public class EvenementController {
             evenement.setHeure(Time.valueOf(evenementDTO.getHeure()+":00"));
             evenement.setPlaceAdresse(evenementDTO.getPlaceAdresse());
             evenement.setEtat(evenementDTO.getEtat());
-            evenement.setUser(userRepository.getById(evenementDTO.getUserId()));
+            evenement.setOwner(userRepository.getById(evenementDTO.getUserId()));
             evenement.setPieceJoint(fileName);
             evenementService.addEvenement(evenement);
 
@@ -93,5 +94,16 @@ public class EvenementController {
     @PutMapping(value = "/updateEvent", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> updateEvenement(@ModelAttribute EvenementDTO evenementDTO) {
       return  evenementService.updateEvenement(evenementDTO);
+    }
+
+
+    @PutMapping("/events/{eventId}/register/{memberId}")
+    public ResponseEntity<String> registerMemberToEvent(@PathVariable Long eventId, @PathVariable Long memberId) {
+        return  evenementService.registerMemberToEvent(eventId, memberId);
+    }
+
+    @GetMapping("/eventsParticipant/{eventId}")
+    public ResponseEntity<List<EventParticipants>> getEventParticipants(@PathVariable Long eventId) {
+        return  evenementService.getEventParticipants(eventId);
     }
 }

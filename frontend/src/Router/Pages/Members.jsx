@@ -27,20 +27,18 @@ export default function  Members(){
         })
 
         return memberToDisplay.map((member,key)=>{
-            return <MemberComp member={member} key={key} deleteMember={deleteMember} blockMember={blockMember} />
+            return <MemberComp member={member} key={key} deleteMember={deleteMember} blockMember={blockMember} upgradeMember={upgradeMember} />
         })
     }
 
     const deleteMember = async (e)=>{
-        const idMember = parseInt(e.currentTarget.dataset.id);
+        if (window.confirm("Vous êtes sûr ?")) {
+        const idMember = e.currentTarget.dataset.id;
         try{
 
           const response = await  fetch(`http://localhost:8080/user/${idMember}`,{
             method:"DELETE",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-           
+            
           });
 
           if(response.status===200){
@@ -53,16 +51,18 @@ export default function  Members(){
                 console.log("Member Not Found Not Found");
             }
             else{
-                console.log("failed to delete Member");
+                console.log("failed to delete Member" + response.status);
             }
         }catch(error){
             console.log(error);
         }
     }
+}
           
         
 
        const blockMember = async (e)=>{
+        if (window.confirm("Vous êtes sûr ?")) {
         const idMember = e.currentTarget.dataset.id
         try{
             const response = await fetch(`http://localhost:8080/user/${idMember}`,{
@@ -81,7 +81,35 @@ export default function  Members(){
         }catch(error){
             console.log(error);
         }
+    }
          }
+
+
+         const upgradeMember = async  (e) => {
+            e.preventDefault();
+            if (window.confirm("Vous êtes sûr ?")) {
+                const idMember = e.currentTarget.dataset.id
+                try{
+                    const response = await fetch(`http://localhost:8080/updateUser/${idMember}`,{
+                        method:"PATCH",
+                       
+                    });
+                    if(response.status===200){
+                        fetchMembers()
+                    }
+                    else if(response.status===404){
+                        console.log("Member Not Found Not Found");
+                    }
+                    else{
+                        console.log("failed to upgrade Member");
+                    }
+                }catch(error){
+                    console.log(error);
+                }
+                 }
+        
+             
+          }
 
 
 

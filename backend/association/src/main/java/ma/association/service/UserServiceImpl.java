@@ -45,12 +45,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleteUser(Long id) {
+    public ResponseEntity<String> deleteUser(Long id) {
         if(!userRepository.existsById(id)){
-            throw new UserNotFoundException(id);
+           return  ResponseEntity.badRequest().body("User not found");
         }
         userRepository.deleteById(id);
-        return "User deleted";
+        return ResponseEntity.ok("User deleted successfully!");
     }
 
     @Override
@@ -105,6 +105,20 @@ public class UserServiceImpl implements UserService {
 
         }
         return  ResponseEntity.notFound().build();
+    }
+
+    public ResponseEntity<String> upgradeToModerator(Long id){
+        User user = userRepository.findById(id).orElse(null);
+        if(user != null){
+            if(user.getRole().equals("Memeber")){
+                user.setRole("Moderateur");
+            }
+            else{
+                user.setRole("Memeber");
+            }
+            userRepository.save(user);
+        }
+        return  ResponseEntity.ok("User updated successfully");
     }
 
 }

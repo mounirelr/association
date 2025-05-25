@@ -10,7 +10,15 @@ export default function Evenement() {
   const { inputSearch } = useOutletContext();
   const [formEdit, setFormEdit] = useState(false);
   const [editedEvent, setEditedEvent] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null); // NEW STATE
+  const [selectedEvent, setSelectedEvent] = useState(null); 
+  const [connectedUser,setConnectedUser]=useState([])
+
+  const getConnectedUser=()=>{
+    const user = JSON.parse(localStorage.getItem("connectedUser"));
+    if (user) {
+        setConnectedUser(user);
+}
+}
 
   const getEvents = async () => {
     const response = await fetch("http://localhost:8080/events");
@@ -29,6 +37,7 @@ export default function Evenement() {
         getEvents={getEvents}
         editEventTrigger={editEventTrigger}
         displayEventDetails={displayEventDetails}
+        connectedUser={connectedUser}
       />
     ));
   };
@@ -57,13 +66,16 @@ export default function Evenement() {
   };
 
   useEffect(() => {
+    getConnectedUser()
     getEvents();
   }, [formEdit]);
 
   return (
     <div className="eventManagement">
-      {/* Add Event Section */}
-      {formEdit ? (
+     
+      
+   
+      { connectedUser.role==="Moderateur" && formEdit ? (
         <CreateEventCard
           getEvents={getEvents}
           formEdit={true}
@@ -71,16 +83,16 @@ export default function Evenement() {
           resetEdit={resetEdit}
           key={editedEvent?.id || "create"}
         />
-      ) : (
+      ) : connectedUser.role==="Moderateur" ? (
         <CreateEventCard
           getEvents={getEvents}
           formEdit={false}
           resetEdit={resetEdit}
           key="create"
         />
-      )}
+      ) :''}
 
-      {/* Event List Section */}
+     
       <section className="eventManagement__listSection">
         <div className="sectionHeader">
           <h2 className="sectionHeader__title">Événements à venir</h2>
@@ -96,7 +108,7 @@ export default function Evenement() {
         <div className="eventGrid">{displayEvents()}</div>
       </section>
 
-      {/* Modal for Event Details */}
+      
       {selectedEvent && (
         <div className="eventDetailsModal">
           <div className="eventDetailsContent">

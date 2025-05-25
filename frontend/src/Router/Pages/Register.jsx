@@ -34,7 +34,7 @@ export default function Register(){
         "phone" :phone,
         "email" :email,
         "password" :password,
-        "role" :"Member",
+        "role" :"Memeber",
         "status" :"Active"
         
        }

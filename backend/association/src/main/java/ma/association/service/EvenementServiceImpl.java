@@ -1,9 +1,12 @@
 package ma.association.service;
 
+import jakarta.transaction.Transactional;
 import ma.association.DTO.EvenementDTO;
+import ma.association.DTO.EventParticipants;
 import ma.association.model.Evenement;
 import ma.association.model.User;
 import ma.association.repository.EvenementRepository;
+import ma.association.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,8 @@ import java.util.UUID;
 public class EvenementServiceImpl implements EvenementService {
     @Autowired
     private EvenementRepository  evenementRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Value("${UPLOAD_DIR}")
@@ -113,4 +118,41 @@ public class EvenementServiceImpl implements EvenementService {
         }
         return ResponseEntity.badRequest().body("Evenementne n'existe pas");
     }
+
+
+    @Override
+    @Transactional
+    public ResponseEntity<String> registerMemberToEvent(Long eventId, Long memberId) {
+        User member = userRepository.findById(memberId).orElse(null);
+        Evenement evenement = evenementRepository.findById(eventId).orElse(null);
+        if (evenement == null || member == null) {
+            return ResponseEntity.badRequest().body("Evenement ou membre n'existe pas");
+        }
+
+        if (member.getParticipatingEvents().contains(evenement)) {
+            return ResponseEntity.badRequest().body("Vous êtes déjà inscrit à cet événement ");
+        }
+
+
+        member.getParticipatingEvents().add(evenement);
+        userRepository.save(member);
+
+        return ResponseEntity.ok("Vous avez été enregistré à cet événement avec succès");
+    }
+
+    private  EventParticipants mapToParticipant(User user){
+        return new EventParticipants(user.getFirstName(),user.getLastName(),user.getEmail(),user.getPhone());
+    }
+
+
+    public ResponseEntity<List<EventParticipants>> getEventParticipants(Long eventId){
+        Evenement evenement = evenementRepository.findById(eventId).orElse(null);
+        if (evenement != null) {
+            List<EventParticipants> participants = evenement.getParticipants().stream().map(participant -> mapToParticipant(participant)).toList();
+                return ResponseEntity.ok(participants);
+
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
