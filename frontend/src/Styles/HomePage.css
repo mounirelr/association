@@ -1,0 +1,384 @@
+/* --- Navbar --- */
+.home-app{
+    width: 100%;
+}
+.home-navbar {
+    background-color: #2e7d32; /* dark green */
+    padding: 0.5rem 1rem; /* Reduced padding */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 50px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .home-navbar-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Logo */
+  .home-navbar-logo {
+    font-weight: 700;
+    font-size: 1.3rem; /* Slightly smaller */
+    color: white;
+    text-decoration: none;
+    user-select: none;
+  }
+  
+  /* Hamburger Menu Icon */
+  .home-menu-icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px; /* Smaller */
+    height: 20px; /* Smaller */
+    z-index: 1100;
+    display: none; /* hidden on desktop */
+  }
+  
+  .home-menu-icon-bar {
+    width: 100%;
+    height: 2px; /* Thinner */
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .home-menu-icon-bar.home-open:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  
+  .home-menu-icon-bar.home-open:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .home-menu-icon-bar.home-open:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  
+  /* Navigation Menu */
+  .home-nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  
+  .home-nav-menu.home-active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: #2e7d32;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 1050;
+  }
+  
+  /* Nav Items */
+  .home-nav-item {
+    height: 30px; /* Fixed height for nav items */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Nav Links */
+  .home-nav-link {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.25rem 0; /* Reduced padding */
+    display: inline-block;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-size: 0.95rem; /* Slightly smaller */
+    height: 100%; /* Take full height of nav item */
+    display: flex;
+    align-items: center;
+  }
+  
+  .home-nav-link.home-active {
+    color: #a5d6a7; /* lighter green */
+    border-bottom: 2px solid #a5d6a7;
+  }
+  
+  .home-nav-link:hover {
+    color: #a5d6a7;
+  }
+  
+  /* Logout button in navbar */
+  .home-nav-button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.25rem 0; /* Reduced padding */
+    font-family: inherit;
+    transition: color 0.3s ease;
+    font-size: 0.95rem; /* Slightly smaller */
+    height: 100%; /* Take full height of nav item */
+    display: flex;
+    align-items: center;
+  }
+  
+  .home-nav-button:hover {
+    color: #a5d6a7;
+  }
+  
+  /* --- Responsive Navbar --- */
+  @media (max-width: 768px) {
+    .home-menu-icon {
+      display: flex;
+    }
+  
+    .home-nav-menu {
+      display: none;
+    }
+  
+    .home-nav-menu.home-active {
+      display: flex;
+    }
+  }
+  
+  /* Rest of your existing CSS remains the same */
+  /* --- Main Page Styles --- */
+  .home-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2e7d32;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  /* --- Hero Section --- */
+  .home-hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .home-hero-content {
+    flex: 1 1 400px;
+    max-width: 600px;
+  }
+  
+  .home-hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .home-hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+  
+  /* Hero buttons */
+  .home-hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .home-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    border: 2px solid transparent;
+  }
+  
+  .home-btn-primary {
+    background-color: #2e7d32;
+    color: white;
+    border-color: #2e7d32;
+  }
+  
+  .home-btn-primary:hover {
+    background-color: #a5d6a7;
+    color: #2e7d32;
+    border-color: #a5d6a7;
+  }
+  
+  .home-btn-secondary {
+    background-color: transparent;
+    color: #2e7d32;
+    border-color: #2e7d32;
+  }
+  
+  .home-btn-secondary:hover {
+    background-color: #a5d6a7;
+    color: #2e7d32;
+  }
+  
+  /* Hero image and shape */
+  .home-hero-image {
+    flex: 1 1 300px;
+    position: relative;
+    min-height: 300px;
+    background: linear-gradient(135deg, #66bb6a, #2e7d32);
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(46,125,50,0.3);
+  }
+  
+  .home-hero-shape {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: white;
+    border-radius: 50% 30% / 60% 40%;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  
+  /* --- Features Section --- */
+  .home-features-section {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  
+  .home-features-section h2 {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Features grid */
+  .home-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 2rem;
+  }
+  
+  /* Feature cards */
+  .home-feature-card {
+    background-color: #f1f8f3;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 10px rgba(46,125,50,0.1);
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    cursor: default;
+  }
+  
+  .home-feature-card:hover {
+    box-shadow: 0 8px 20px rgba(46,125,50,0.2);
+  }
+  
+  .home-feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Feature titles */
+  .home-feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #2e7d32;
+  }
+  
+  /* Feature descriptions */
+  .home-feature-card p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #4a7c43;
+  }
+  
+  /* Feature link */
+  .home-feature-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: #2e7d32;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  
+  .home-feature-link:hover {
+    border-color: #66bb6a;
+  }
+  
+  /* --- Call to Action Section --- */
+  .home-cta-section {
+    text-align: center;
+    background-color: #e8f5e9;
+    padding: 3rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(46,125,50,0.15);
+    margin-bottom: 3rem;
+  }
+  
+  .home-cta-section h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    color: #2e7d32;
+  }
+  
+  .home-cta-section p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #4a7c43;
+  }
+  
+  .home-cta-button {
+    background-color: #2e7d32;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    user-select: none;
+  }
+  
+  .home-cta-button:hover {
+    background-color: #66bb6a;
+    color: #1b3a16;
+  }
+  
+  /* --- Responsive tweaks --- */
+  @media (max-width: 768px) {
+    .home-hero-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .home-hero-image {
+      min-height: 200px;
+      width: 100%;
+      margin-top: 2rem;
+    }
+  
+    .home-hero-content h1 {
+      font-size: 2.25rem;
+    }
+  
+    .home-features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  

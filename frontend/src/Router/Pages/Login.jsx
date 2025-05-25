@@ -59,14 +59,14 @@ import { useRef , useState} from "react";
               </div>
       
               <div className="login-form-row">
-                <input type="password" placeholder="Password" required  ref={passwordInput}/>
+                <input type="password" placeholder="Mot de passe" required  ref={passwordInput}/>
               </div>
       
               <button onClick={handleSubmitLogin}  type="submit">Login</button>
             </form>
       
             <p className="register-link">
-              Don't have an account? <Link to="/register">Register here</Link>
+            Vous n'avez pas de compte ? <Link to="/register">Inscrivez-vous ici</Link>
             </p>
           </div>
         </div>

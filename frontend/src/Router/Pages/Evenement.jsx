@@ -43,7 +43,39 @@ export default function Evenement() {
   };
 
   const handleChangeFilterPeriode = (e) => {
-    console.log(e.currentTarget.value);
+    const filterValue = e.currentTarget.value;
+    const today = new Date();
+    
+    const filteredEvents = eventsList.filter(event => {
+      const eventDate = new Date(event.date);
+      
+      switch(filterValue) {
+        case "Cette semaine":
+          const startOfWeek = new Date(today);
+          startOfWeek.setDate(today.getDate() - today.getDay()); 
+          const endOfWeek = new Date(today);
+          endOfWeek.setDate(today.getDate() + (6 - today.getDay())); 
+          
+          return eventDate >= startOfWeek && eventDate <= endOfWeek;
+          
+        case "Ce mois":
+         
+          return (
+            eventDate.getMonth() === today.getMonth() && 
+            eventDate.getFullYear() === today.getFullYear()
+          );
+          
+        default: 
+          return true;
+      }
+    });
+    
+    setEventList(filteredEvents);
+    
+    
+    if (filterValue === "Tous les événements") {
+      getEvents();
+    }
   };
 
   const editEventTrigger = (id) => {

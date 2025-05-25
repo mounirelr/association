@@ -130,25 +130,25 @@ export default function Register(){
         </div>
       <form>
         <div className="form-row">
-          <input type="text" placeholder="First Name" required ref={firstNameInput} />
-          <input type="text" placeholder="Last Name" required ref={lastNameInput} />
+          <input type="text" placeholder="Nom" required ref={firstNameInput} />
+          <input type="text" placeholder="Prenom" required ref={lastNameInput} />
         </div>
 
         <div className="form-row">
-          <input type="tel" placeholder="Phone" required ref={phoneInput} />
+          <input type="tel" placeholder="Telephone" required ref={phoneInput} />
           <input type="email" placeholder="Email" required ref={emailInput} />
         </div>
 
         <div className="form-row">
-          <input type="password" placeholder="Password" required ref={passwordInput} />
-          <input type="password" placeholder="Confirm Password" required  ref={passwordVerifiyInput}/>
+          <input type="password" placeholder="Mot de passe" required ref={passwordInput} />
+          <input type="password" placeholder="Confirmer votre mot de passe" required  ref={passwordVerifiyInput}/>
         </div>
 
-        <button onClick={handeSubmitRegister} type="submit">Register</button>
+        <button onClick={handeSubmitRegister} type="submit">S'inscrire</button>
       </form>
 
       <p className="login-link">
-        Already have an account? <Link to="/login">Login here</Link>
+      Vous avez déjà un compte ? <Link to="/login">Connectez-vous ici</Link>
       </p>
     </div>
   </div>

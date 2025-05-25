@@ -64,10 +64,10 @@ export default function Profil() {
       <div className="profile-info">
         <div className="profile-details">
           <h2>
-            Personal Information
+          Informations personnelles
             {!editMode && (
               <button className="edit-btn" onClick={() => setEditMode(true)}>
-                Edit
+               Modifier
               </button>
             )}
           </h2>
@@ -79,7 +79,7 @@ export default function Profil() {
                 <span className="value">{userDetails.email}</span>
               </div>
               <div className="info-item">
-                <span className="label">Phone:</span>
+                <span className="label">Telephone:</span>
                 <span className="value">{userDetails.phone}</span>
               </div>
               <div className="info-item">
@@ -100,7 +100,7 @@ export default function Profil() {
                 />
               </div>
               <div className="form-group">
-                <label>Phone:</label>
+                <label>Telephone:</label>
                 <input
                   type="text"
                   name="phone"
@@ -110,7 +110,7 @@ export default function Profil() {
                 />
               </div>
               <div className="form-group">
-                <label>Password:</label>
+                <label>Mot de passe:</label>
                 <input
                   type="password"
                   name="password"
@@ -119,7 +119,7 @@ export default function Profil() {
                 />
               </div>
               <div className="form-group">
-                <label>Confirm Password:</label>
+                <label>Confirmer votre mot de passe:</label>
                 <input
                   type="password"
                   name="passwordVerify"
@@ -129,14 +129,14 @@ export default function Profil() {
               </div>
               <div className="form-buttons">
                 <button type="submit" className="submit-btn">
-                  Save
+                Enregistrer
                 </button>
                 <button
                   type="button"
                   className="cancel-btn"
                   onClick={() => setEditMode(false)}
                 >
-                  Cancel
+                  Annuler
                 </button>
               </div>
             </form>

@@ -65,7 +65,7 @@ export default  function Layout(){
             <li className= {path.toLowerCase() === "evenement" ? "active" : "" }>
             <Link to="/evenement" >
                     <i className="fa-regular fa-calendar-days"></i>
-                    <span>evenement</span>
+                    <span>Evenement</span>
                 </Link>
             </li>
 
