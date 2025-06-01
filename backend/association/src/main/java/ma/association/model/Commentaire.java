@@ -18,11 +18,13 @@ public class Commentaire {
     private LocalDate date;
     private String etat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "evenmentId")
-    private Evenement evenement;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "disscutionId")
+    private Disscution disscution;
 }

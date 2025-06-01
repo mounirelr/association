@@ -6,6 +6,7 @@ import  NotFound from "./Pages/NotFound"
 import Evenement from "./Pages/Evenement";
 import  Members from "./Pages/Members";
 import Register from "./Pages/Register";
+import Disscution from "./Pages/Disscution";
 import Login from "./Pages/Login";
 import Profil from "./Pages/Profil";
 import PrivateRoute from "../PrivateRoute";
@@ -52,6 +53,14 @@ export const router = createBrowserRouter([
                   <Members />
             </PrivateRoute> 
         },
+
+        { path: '/disscution',
+            element : <PrivateRoute>
+                  <Disscution />
+            </PrivateRoute> 
+        },
+
+
 
        { path: '/profil',
         element : <PrivateRoute>

@@ -31,6 +31,9 @@ public class User {
     private List<Evenement> ownedEvents = new ArrayList<>();
 
 
+    @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL)
+    private List<Disscution> disscutions = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(

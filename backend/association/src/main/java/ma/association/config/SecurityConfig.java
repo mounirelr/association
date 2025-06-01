@@ -40,6 +40,7 @@ public class SecurityConfig   {
                         .requestMatchers("/events/**").permitAll()
                         .requestMatchers("/eventsParticipant/**").permitAll()
                         .requestMatchers("updateEvent").permitAll()
+                        .requestMatchers("/addDisscution").permitAll()
                         .requestMatchers("/deleteEvent/**").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
                         .anyRequest().authenticated()

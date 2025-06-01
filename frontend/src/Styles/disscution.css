@@ -1,0 +1,234 @@
+
+.disscussion-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  
+  .disscussion-add-container {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+  }
+  
+ 
+  .disscussion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .disscussion-member-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .disscussion-member-avatar {
+    width: 32px;
+    height: 32px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .disscussion-member {
+    margin: 0;
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  
+  .disscussion-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .disscussion-card-info {
+    flex: 1;
+  }
+  
+  .disscussion-card-title {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .disscussion-card-description {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .disscussion-card-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  /* Main Card Container */
+  .disscussion-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .disscussion-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .disscussion-add-message-btn-container {
+    margin: 10px 0;
+  }
+  
+  
+  .disscussion-messages-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .disscussion-message-container {
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+  }
+  
+  .disscussion-message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  
+  .disscussion-message-author {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .disscussion-message-time {
+    color: #888;
+  }
+  
+  .disscussion-message {
+    margin: 0;
+    color: #424242;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+  
+  /* Input Fields */
+  .disscussion-add-form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .disscussion-edit-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  
+  .disscussion-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  
+  .disscussion-show-btn {
+    background: #f0f0f0;
+    color: #555;
+  }
+  
+  .disscussion-show-btn:hover {
+    background: #e0e0e0;
+  }
+  
+  .disscussion-add-btn, 
+  .disscussion-add-discussion-btn {
+    background: #673AB7;
+    color: white;
+    padding: 8px 16px;
+  }
+  
+  .disscussion-add-btn:hover,
+  .disscussion-add-discussion-btn:hover {
+    background: #5E35B1;
+    transform: translateY(-1px);
+  }
+  
+  .disscussion-edit-btn {
+    background: #2196F3;
+    color: white;
+  }
+  
+  .disscussion-edit-btn:hover {
+    background: #0d8bf2;
+    transform: translateY(-1px);
+  }
+  
+  .disscussion-delete-btn {
+    background: #ffebee;
+    color: #f44336;
+  }
+  
+  .disscussion-delete-btn:hover {
+    background: #ffcdd2;
+    transform: translateY(-1px);
+  }
+  
+  .disscussion-save-btn {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .disscussion-save-btn:hover {
+    background: #45a049;
+  }
+  
+
+  .disscussion-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
