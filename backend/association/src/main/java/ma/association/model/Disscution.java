@@ -1,5 +1,6 @@
 package ma.association.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,12 +22,14 @@ public class Disscution {
     private String status = "Active";
 
     @OneToMany(mappedBy = "disscution" , cascade = CascadeType.ALL)
+
     private List<Commentaire> commentaire = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userOwnerId")
-    @JsonIgnore
+    @JsonBackReference
+
     private User owner;
 
 }
