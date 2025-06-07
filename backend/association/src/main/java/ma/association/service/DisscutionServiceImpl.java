@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class DisscutionServiceImpl implements DisscutionService {
     @Autowired
@@ -96,6 +94,15 @@ public class DisscutionServiceImpl implements DisscutionService {
 
 
    }
+   public  ResponseEntity<String> updateMessageDisscution(Long idMessage,NewComment newComment){
+        Commentaire oldComment = commentaireRepository.findById(idMessage).orElse(null);
+        if(oldComment != null) {
+            oldComment.setContenu(newComment.getContenu());
+            commentaireRepository.save(oldComment);
+            return ResponseEntity.ok("Message update successfully");
+        }
+        return ResponseEntity.badRequest().body("Error updating Message");
+   }
 
     @Override
     public ResponseEntity<Disscution> updateDisscution(Disscution d) {
@@ -103,7 +110,22 @@ public class DisscutionServiceImpl implements DisscutionService {
     }
 
     @Override
-    public ResponseEntity<Disscution> deleteDisscution(Long id) {
-        return null;
+    public ResponseEntity<String> deleteDisscution(Long id) {
+        try {
+             disscutionRepository.deleteById(id);
+             return ResponseEntity.ok("disscution delete successfully");
+        } catch (Exception e) {
+            return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+   public ResponseEntity<String> deleteMessageDisscution(Long id){
+       try {
+           commentaireRepository.deleteById(id);
+           return ResponseEntity.ok("message delete successfully");
+       } catch (Exception e) {
+           return  ResponseEntity.badRequest().body(e.getMessage());
+       }
+
     }
 }

@@ -9,11 +9,36 @@ export default function DissuctionCard({diss}){
     const [isEditing, setIsEditing] = useState(null);
 
 
-    const handleEdit = (messageId, currentContent) => {
+    const handleEdit = async (messageId, currentContent) => {
         if (isEditing === messageId) {
         
           setIsEditing(null);
+          try{
+
+            const response = await fetch(`http://localhost:8080/updateMessageDisscution/${messageId}`,{
+                method: 'PUT',
+                headers :{
+                    "Content-Type":"application/json"
+                },
+               body: JSON.stringify({
+                    "contenu": editedMessage,
+                    
+    
+                }),
+            })
+            if(response.ok){
+                console.log("Message Updated")
+               
+            }
+    
+    
+           }catch(error){
+            console.log(error)
+           }
+          
+          
         } else {
+           
           setEditedMessage(currentContent);
           setIsEditing(messageId);
         }
@@ -33,12 +58,45 @@ export default function DissuctionCard({diss}){
   const handleShowMessages = () => setShowMessages(!showMessages);
 
 
-    const handleDeleteMessage = (messageId) => {
+    const handleDeleteMessage =  async(messageId) => {
         console.log("Delete message:", messageId);
-      };
+        try{
+
+            const response = await fetch(`http://localhost:8080/deleteMessageDisscution/${messageId}`,{
+                method: 'DELETE',
+            })
+            if(response.ok){
+                console.log("deleted successfuly")
+               
+            }
     
-      const handleDeleteDiscussion = () => {
-        console.log("Delete discussion");
+    
+           }catch(error){
+            console.log(error)
+           }
+        }
+    
+      
+    
+      const handleDeleteDiscussion =  async(e) => {
+       const idDiss= e.currentTarget.dataset.id
+       try{
+
+        const response = await fetch(`http://localhost:8080/deleteDisscution/${idDiss}`,{
+            method: 'DELETE',
+        })
+        if(response.ok){
+            console.log("deleted successfuly")
+           
+        }
+
+
+       }catch(error){
+        console.log(error)
+       }
+
+       
+       
       };
     
       const handleAddMessage =  async (e) => {
@@ -101,13 +159,14 @@ export default function DissuctionCard({diss}){
           className="disscussion-btn disscussion-show-btn"
           onClick={handleShowMessages}
         >
-          {showMessages ? 'Hide Messages' : 'Show Messages'}
+          {showMessages ? 'Masquer les messages' : 'Afficher les messages'}
         </button>
         <button
           className="disscussion-btn disscussion-delete-btn"
+          data-id={diss.id}
           onClick={handleDeleteDiscussion}
         >
-          Delete Discussion
+          Supprimer Discussion
         </button>
       </div>
     </div>
@@ -119,7 +178,7 @@ export default function DissuctionCard({diss}){
             className="disscussion-btn disscussion-add-btn"
             onClick={() => setShowAddForm(!showAddForm)}
           >
-            {showAddForm ? 'Cancel' : 'Add Message'}
+            {showAddForm ? 'Annuler' : 'Ajouter un message'}
           </button>
         </div>
 
@@ -129,7 +188,7 @@ export default function DissuctionCard({diss}){
               className="disscussion-edit-input"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Write your message..."
+              placeholder="Écrivez votre message..."
             />
             <div className="disscussion-actions">
               <button
@@ -137,7 +196,7 @@ export default function DissuctionCard({diss}){
                 data-id={diss.id}
                 onClick={handleAddMessage}
               >
-                Post Message
+                Publier le message
               </button>
             </div>
           </div>
@@ -170,13 +229,13 @@ export default function DissuctionCard({diss}){
                   className="disscussion-btn disscussion-edit-btn"
                   onClick={() => handleEdit(msg.id, msg.contenu)}
                 >
-                  {isEditing === msg.id ? 'Save' : 'Edit'}
+                  {isEditing === msg.id ? 'Enregistrer' : 'Modifier'}
                 </button>
                 <button
                   className="disscussion-btn disscussion-delete-btn"
                   onClick={() => handleDeleteMessage(msg.id)}
                 >
-                  Delete
+                  Supprimer
                 </button>
               </div>
             </div>

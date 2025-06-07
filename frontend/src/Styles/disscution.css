@@ -140,7 +140,7 @@
     font-size: 14px;
   }
   
-  /* Input Fields */
+
   .disscussion-add-form input[type="text"] {
     width: 100%;
     padding: 12px;
@@ -185,14 +185,14 @@
   
   .disscussion-add-btn, 
   .disscussion-add-discussion-btn {
-    background: #673AB7;
+    background: #28a745;
     color: white;
     padding: 8px 16px;
   }
   
   .disscussion-add-btn:hover,
   .disscussion-add-discussion-btn:hover {
-    background: #5E35B1;
+    background: #2d8542;
     transform: translateY(-1px);
   }
   

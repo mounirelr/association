@@ -48,7 +48,7 @@ public class UserController {
         return userService.upgradeToModerator(id);
     }
 
-    @PatchMapping("/upgradeUser")
+    @PatchMapping("/updateUser")
     ResponseEntity<String> updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import "../../Styles/profil.css";
 
 export default function Profil() {
@@ -31,7 +31,7 @@ export default function Profil() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  async(e) => {
     e.preventDefault();
     if (formData.password !== formData.passwordVerify) {
       alert("Passwords do not match.");
@@ -39,13 +39,36 @@ export default function Profil() {
     }
 
     const updatedUser = {
-      ...userDetails,
+        id:userDetails.id,
       email: formData.email,
-      phone: formData.phone
+      phone: formData.phone,
+      password :formData.password
     };
+    console.log(updatedUser)
 
-    setUserDetails(updatedUser);
-    localStorage.setItem("connectedUser", JSON.stringify(updatedUser));
+
+    try{
+
+        const response = await fetch(`http://localhost:8080/updateUser`,{
+            method: 'PATCH',
+            headers :{
+                "Content-Type":"application/json"
+            },
+           body: JSON.stringify(updatedUser),
+        })
+        if(response.ok){
+            console.log("user Updated")
+            localStorage.setItem("connectedUser",JSON.stringify({ ...userDetails, ...updatedUser }))
+           
+        }
+
+
+       }catch(error){
+        console.log(error)
+       }
+
+    setUserDetails(userDetails);
+    
     setEditMode(false);
   };
 

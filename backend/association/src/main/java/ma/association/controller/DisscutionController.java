@@ -31,4 +31,19 @@ public class DisscutionController {
     public ResponseEntity<String> addMessage(@RequestBody NewComment newComment) {
         return disscutionService.addMessage(newComment);
     }
+
+    @DeleteMapping("/deleteDisscution/{id}")
+    public ResponseEntity<String> deleteDisscution(@PathVariable Long id) {
+        return disscutionService.deleteDisscution(id);
+    }
+
+    @DeleteMapping("/deleteMessageDisscution/{id}")
+    public ResponseEntity<String> deleteDisscutionMessage(@PathVariable Long id) {
+        return disscutionService.deleteMessageDisscution(id);
+    }
+
+    @PutMapping("updateMessageDisscution/{id}")
+    public ResponseEntity<String> updateMessageDisscution(@PathVariable Long id, @RequestBody NewComment newComment) {
+        return disscutionService.updateMessageDisscution(id, newComment);
+    }
 }

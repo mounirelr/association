@@ -72,7 +72,7 @@ export default function CreateDisscutionCard() {
           onClick={() => setShowAddDiscussionForm(!showAddDiscussionForm)}
           style={{ marginBottom: "5px" }}
         >
-          {showAddDiscussionForm ? 'Cancel' : 'Add Discussion'}
+          {showAddDiscussionForm ? 'Annuler' : 'Ajouter une discussion'}
         </button>
       </div>
       
@@ -83,20 +83,20 @@ export default function CreateDisscutionCard() {
             className="disscussion-edit-input"
             
              ref={newDiscussionTitle}
-            placeholder="Discussion Title"
+            placeholder="Titre de la discussion"
           />
           <textarea
             className="disscussion-edit-input"
            
              ref={newDiscussionDescription}
-            placeholder="Discussion Description"
+            placeholder="Description de la discussion"
           />
           <div className="disscussion-actions">
             <button
               className="disscussion-btn disscussion-save-btn"
               onClick={handleAddDiscussion}
             >
-              Create Discussion
+              Créer une discussion
             </button>
           </div>
         </div>
