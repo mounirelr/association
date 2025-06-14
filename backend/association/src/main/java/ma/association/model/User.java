@@ -30,6 +30,9 @@ public class User {
     private String status;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Evenement> ownedEvents = new ArrayList<>();
 
 

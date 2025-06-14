@@ -31,4 +31,10 @@ public class Commentaire {
     @JoinColumn(name = "disscutionId")
     @JsonBackReference
     private Disscution disscution;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postId")
+    @JsonBackReference
+    private Post post;
 }

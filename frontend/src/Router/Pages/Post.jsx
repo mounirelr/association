@@ -7,61 +7,59 @@ import CreatePostCard from "../../Components/CreatePostCard";
 export default  function Post(){
   const { inputSearch } = useOutletContext();
 
-  const [postList , setPostsList] = useState([])
+  const [postList, setPostList] = useState([]);
 
-  const [usersList , setUserList] = useState([])
+
+
 
   
 
 
-  const fetchUsers = async ()   =>{
 
-  await   fetch('https://dummyjson.com/users')
-    .then(response=> response.json())
-    .then(resposne=> setUserList(resposne.users))
-  }
 
 
   const fetchPosts =  async()=>{
 
-     await fetch('https://dummyjson.com/posts')
-    .then(response=> response.json())
-    .then(response=>setPostsList(response.posts))
+    const response = await fetch("http://localhost:8080/posts");
+    const data = await response.json();
+    console.log(data)
+    setPostList(data);
   }
 
 
-  const displayPost = ()=>{
-
-    const SearchedPostList = postList.filter(post=>{
-      return post.title.toLowerCase().includes(inputSearch.toLowerCase())
-    })
-    
-
-     return SearchedPostList.map((post,key)=> { 
-
-    
-      const user = usersList.find(u=>  u.id === post.userId) ;
-      
-    
-    return  <PostCard   post={post}  key={key} user={user} /> 
-  })
-}
+  const displayPost = () => {
+    if (!postList || !Array.isArray(postList)) return [];
+  
+    const SearchedPostList = postList.filter(post => {
+      return post.titre.toLowerCase().includes(inputSearch.toLowerCase());
+    });
+  
+    return SearchedPostList.map((post, key) => (
+      <PostCard post={post} key={key} />
+    ));
+  };
+  
 
 
 
 
 
   useEffect(()=>{
-    fetchUsers()
+   
     fetchPosts()
+   
     
     
   },[])
 
   return <>
-{console.log(inputSearch)}
-<CreatePostCard />
+  <div className="contanierCardPost">
+
+
+  <CreatePostCard />
   {displayPost()}
+  </div>
+
   </>
     
    
