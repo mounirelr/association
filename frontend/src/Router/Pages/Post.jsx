@@ -8,6 +8,14 @@ export default  function Post(){
   const { inputSearch } = useOutletContext();
 
   const [postList, setPostList] = useState([]);
+  const [connectedUser,setConnectedUser]=useState([])
+
+  const getConnectedUser=()=>{
+    const user = JSON.parse(localStorage.getItem("connectedUser"));
+    if (user) {
+        setConnectedUser(user);
+}
+}
 
 
 
@@ -45,18 +53,16 @@ export default  function Post(){
 
 
   useEffect(()=>{
-   
+    getConnectedUser()
     fetchPosts()
-   
-    
-    
   },[])
 
   return <>
   <div className="contanierCardPost">
+    {connectedUser.role==="Memeber" &&(
 
-
-  <CreatePostCard />
+     <CreatePostCard />
+    )}
   {displayPost()}
   </div>
 

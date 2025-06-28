@@ -7,6 +7,7 @@ export default function DissuctionCard({diss}){
   const [newMessage, setNewMessage] = useState('');
    const [showMessages, setShowMessages] = useState(false);
     const [isEditing, setIsEditing] = useState(null);
+    
 
 
     const handleEdit = async (messageId, currentContent) => {
@@ -173,14 +174,16 @@ export default function DissuctionCard({diss}){
 
     {showMessages && (
       <>
+       {connectedUser.role!=="Admin" && (
         <div className="disscussion-add-message-btn-container">
-          <button
-            className="disscussion-btn disscussion-add-btn"
-            onClick={() => setShowAddForm(!showAddForm)}
-          >
-            {showAddForm ? 'Annuler' : 'Ajouter un message'}
-          </button>
-        </div>
+        <button
+          className="disscussion-btn disscussion-add-btn"
+          onClick={() => setShowAddForm(!showAddForm)}
+        >
+          {showAddForm ? 'Annuler' : 'Ajouter un message'}
+        </button>
+      </div>
+       )} 
 
         {showAddForm && (
           <div className="disscussion-add-form">
@@ -225,12 +228,14 @@ export default function DissuctionCard({diss}){
               )}
               
               <div className="disscussion-actions">
-                <button
-                  className="disscussion-btn disscussion-edit-btn"
-                  onClick={() => handleEdit(msg.id, msg.contenu)}
-                >
-                  {isEditing === msg.id ? 'Enregistrer' : 'Modifier'}
-                </button>
+                {connectedUser.role!=="Admin" &&(
+                    <button
+                    className="disscussion-btn disscussion-edit-btn"
+                    onClick={() => handleEdit(msg.id, msg.contenu)}
+                  >
+                    {isEditing === msg.id ? 'Enregistrer' : 'Modifier'}
+                  </button>
+                )}
                 <button
                   className="disscussion-btn disscussion-delete-btn"
                   onClick={() => handleDeleteMessage(msg.id)}

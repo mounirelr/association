@@ -38,6 +38,7 @@ public class SecurityConfig   {
                         .requestMatchers("/addEvent").permitAll()
                         .requestMatchers("/post").permitAll()
                         .requestMatchers("/posts").permitAll()
+                        .requestMatchers("/likePost/**").permitAll()
                         .requestMatchers("/addPostComment").permitAll()
                         .requestMatchers("/deletePost/**").permitAll()
                         .requestMatchers("/events").permitAll()

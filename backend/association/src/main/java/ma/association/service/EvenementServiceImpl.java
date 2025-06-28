@@ -148,7 +148,7 @@ public class EvenementServiceImpl implements EvenementService {
     public ResponseEntity<List<EventParticipants>> getEventParticipants(Long eventId){
         Evenement evenement = evenementRepository.findById(eventId).orElse(null);
         if (evenement != null) {
-            List<EventParticipants> participants = evenement.getParticipants().stream().map(participant -> mapToParticipant(participant)).toList();
+            List<EventParticipants> participants = evenement.getParticipants().stream().map(participant -> mapToParticipant((User) participant)).toList();
                 return ResponseEntity.ok(participants);
 
         }

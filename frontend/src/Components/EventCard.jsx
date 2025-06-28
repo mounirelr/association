@@ -172,7 +172,10 @@ export default function EventCard({event ,getEvents,editEventTrigger,displayEven
 
                <div className="eventCard__buttonsModerator">
                         <button className="eventCard__button eventCard__button--register" data-id={event.id} onClick={handleDeleteEvent}>Supprimer</button>
-                        <button className="eventCard__button eventCard__button--more" data-id={event.id} onClick={handeEditEvent}>Modifier</button>
+                        {connectedUser.role==="Memeber" && (
+
+                            <button className="eventCard__button eventCard__button--more" data-id={event.id} onClick={handeEditEvent}>Modifier</button>
+                        )}
                     </div>         
                         
                         </>

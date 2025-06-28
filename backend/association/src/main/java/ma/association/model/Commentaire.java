@@ -29,12 +29,12 @@ public class Commentaire {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "disscutionId")
-    @JsonBackReference
+    @JsonBackReference(value = "comment-discussion")
     private Disscution disscution;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId")
-    @JsonBackReference
+    @JsonBackReference(value = "comment-post")
     private Post post;
 }

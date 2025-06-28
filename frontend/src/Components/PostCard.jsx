@@ -12,8 +12,25 @@ export default function PostCard({ post }) {
 }
 }
 
-  const handleClickLike = (e) => {
+  const handleClickLike = async (e) => {
     e.preventDefault();
+    const postId = e.currentTarget.dataset.id;
+    const userId= connectedUser.id;
+    
+    try{
+      const response = await fetch(`http://localhost:8080/likePost/${postId}/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      
+     if(response.ok){
+      console.log("like add successfully")
+     }
+    }catch(err){
+      console.log(err)
+    }
    
   };
 
@@ -87,14 +104,22 @@ export default function PostCard({ post }) {
         </div>
 
         <div className="post-actions">
+          {connectedUser.role==="Memeber" && connectedUser.id===post.userId &&(
+
           <button className="post-btn edit-btn">Edit</button>
-          <button
+          )}
+          {(connectedUser.role!=="Memeber" || connectedUser.id===post.userId )&& (
+           
+            <button
             className="post-btn delete-btn"
             data-id={post.id}
             onClick={handleDelete}
           >
             Delete
           </button>
+          
+          )}
+          
         </div>
       </div>
 
@@ -111,9 +136,13 @@ export default function PostCard({ post }) {
       </div>
 
       <div className="post-actions">
-        <button onClick={handleClickLike} className="like-btn">
-          👍 20 Like
-        </button>
+       {connectedUser.role==="Memeber" ? (
+         <button onClick={handleClickLike} className="like-btn"  data-id={post.id}>
+         👍 {post.likes} Like
+       </button>
+       ):  <button  className="like-btn"  data-id={post.id}>
+       👍 {post.likes} Like
+     </button>}
         <button onClick={handleToggleComment} className="comment-btn">
           💬 Comment
         </button>
@@ -122,20 +151,22 @@ export default function PostCard({ post }) {
      
       {showComments && (
   <div className="comment-section">
-    <textarea
-      className="comment-input"
-      placeholder="Ecrire un commentaire"
-      value={commentText}
-      onChange={(e) => setCommentText(e.target.value)}
-    ></textarea>
-    <button
-      className="send-comment-btn"
-      data-id={post.id}
-      onClick={handleSendComment}
-    >
-      Ajouter
-    </button>
-    <br />
+    {connectedUser.role==="Memeber"  && (
+     <><textarea
+              className="comment-input"
+              placeholder="Ecrire un commentaire"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            ></textarea><button
+              className="send-comment-btn"
+              data-id={post.id}
+              onClick={handleSendComment}
+            >
+                Ajouter
+              </button></>
+    )}
+    
+   
     
     <div className="existing-comments">
     {post.commentaire && post.commentaire.length > 0 ? (
@@ -150,12 +181,15 @@ export default function PostCard({ post }) {
       </div>
       <div className="rightPostComment">
       <span className="comment-date">{comment.date}</span>
-      <button
+      {(connectedUser.role!=="Memeber" || connectedUser.id===post.userId) &&(
+        <button
         className="delete-comment-btn"
         onClick={() => handleDeleteComment(comment.id)}
       >
         Supprimer
       </button>
+      )}
+      
       </div>
     </div>
   ))

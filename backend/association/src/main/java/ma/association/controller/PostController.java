@@ -37,5 +37,9 @@ public class PostController {
     public ResponseEntity<String> addComment(@RequestBody NewComment newComment) {
          return postService.addComment(newComment);
     }
+    @PutMapping("/likePost/{postId}/{userId}")
+    public ResponseEntity<String> likePost(@PathVariable Long postId,@PathVariable Long userId){
+        return postService.likePost(postId,userId);
+    }
 
 }

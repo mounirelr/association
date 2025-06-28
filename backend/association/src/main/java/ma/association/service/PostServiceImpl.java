@@ -1,11 +1,9 @@
 package ma.association.service;
 
 import ma.association.DTO.*;
-import ma.association.model.Commentaire;
-import ma.association.model.Disscution;
-import ma.association.model.Post;
-import ma.association.model.User;
+import ma.association.model.*;
 import ma.association.repository.CommentaireRepository;
+import ma.association.repository.LikeRepository;
 import ma.association.repository.PostRepository;
 import ma.association.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -38,6 +33,8 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
     @Autowired
     private CommentaireRepository commentaireRepository;
+    @Autowired
+    private LikeRepository likeRepository;
 
 
     @Override
@@ -114,7 +111,9 @@ public class PostServiceImpl implements PostService {
     mapToCommentSend(d.getCommentaire()),
     d.getOwner().getFirstName()+" "+d.getOwner().getLastName(),
     d.getDate(),
-    d.getPieceJoint()
+    d.getPieceJoint(),
+     d.getPostLikes().stream().count(),
+    d.getOwner().getId()
                         ))
                 .toList();
 
@@ -154,5 +153,25 @@ public class PostServiceImpl implements PostService {
     @Override
     public ResponseEntity<Post> update(Post post) {
         return null;
+    }
+
+    public ResponseEntity<String> likePost(Long postId,Long userId){
+        Post post = postRepository.findById(postId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
+        if(post != null && user != null) {
+            PostLike existingLike = likeRepository.findByPost_Id(postId).orElse(null);
+            if(existingLike != null && existingLike.getUser().getId().equals(userId)) {
+                    likeRepository.delete(existingLike);
+                    return ResponseEntity.ok("like removed successfully");
+
+            }
+            PostLike postLike = new PostLike();
+            postLike.setPost(post);
+            postLike.setUser(user);
+            likeRepository.save(postLike);
+            return ResponseEntity.ok("like add successfully");
+        }
+        return ResponseEntity.badRequest().body("Error like post");
+
     }
 }

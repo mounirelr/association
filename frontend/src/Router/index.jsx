@@ -10,10 +10,15 @@ import Disscution from "./Pages/Disscution";
 import Login from "./Pages/Login";
 import Profil from "./Pages/Profil";
 import PrivateRoute from "../PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import Apercu from "./Pages/Apercu";
 
 
 
-export const router = createBrowserRouter([
+
+export const router = createBrowserRouter(
+    [
+    
      {
         path:'/',
         element : <HomePage />  
@@ -39,6 +44,14 @@ export const router = createBrowserRouter([
             path: '/post',
             element : <Post />
         },
+        {
+            path: '/Apercu',
+            element : <PrivateRoute>
+            <AdminRoute>
+            <Apercu />
+             </AdminRoute>
+       </PrivateRoute> 
+        },
 
         {
             path: '/evenement',
@@ -49,12 +62,15 @@ export const router = createBrowserRouter([
 
         {
             path: '/members',
+            
             element : <PrivateRoute>
+                 <AdminRoute>
                   <Members />
+                  </AdminRoute>
             </PrivateRoute> 
         },
 
-        { path: '/disscution',
+        { path: '/discussion',
             element : <PrivateRoute>
                   <Disscution />
             </PrivateRoute> 
@@ -67,6 +83,8 @@ export const router = createBrowserRouter([
               <Profil />
         </PrivateRoute> 
     },
+
+    
 
         {
             path: '/*',

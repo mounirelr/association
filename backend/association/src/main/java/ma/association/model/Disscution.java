@@ -2,6 +2,7 @@ package ma.association.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,13 +23,13 @@ public class Disscution {
     private String status = "Active";
 
     @OneToMany(mappedBy = "disscution" , cascade = CascadeType.ALL)
-
+    @JsonManagedReference(value = "comment-discussion")
     private List<Commentaire> commentaire = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userOwnerId")
-    @JsonBackReference
+    @JsonBackReference(value = "user-discussion")
 
     private User owner;
 

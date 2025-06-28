@@ -1,13 +1,10 @@
 package ma.association.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +27,16 @@ public class User {
     private String status;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "user-post")
     private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "user-event")
     private List<Evenement> ownedEvents = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "user-discussion")
     private List<Disscution> disscutions = new ArrayList<>();
 
 
@@ -48,5 +47,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Evenement> participatingEvents = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "user-post-like")
+    private List<PostLike> postLikes = new ArrayList<>();
 
 }

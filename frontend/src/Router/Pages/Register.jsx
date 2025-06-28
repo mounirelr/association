@@ -124,7 +124,7 @@ export default function Register(){
   return   <div className="containerBase">
   <div className="register-container">
     <div className="register-card">
-      <h2>Create Account</h2>
+      <h2>Créer un compte</h2>
       <div className="error-message">
         {displayErrors()}
         </div>

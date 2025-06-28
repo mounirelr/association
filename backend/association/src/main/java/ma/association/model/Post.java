@@ -1,12 +1,13 @@
 package ma.association.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,15 @@ public class Post {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "ownerId")
-    @JsonIgnore
+    @JsonBackReference(value = "user-post")
     private User owner;
 
 
     @OneToMany(mappedBy = "post" , cascade = CascadeType.ALL)
-
+    @JsonManagedReference(value = "comment-post")
     private List<Commentaire> commentaire = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post" , cascade = CascadeType.ALL)
+    @JsonBackReference(value = "post-post-like")
+    private List<PostLike> postLikes = new ArrayList<>();
 }

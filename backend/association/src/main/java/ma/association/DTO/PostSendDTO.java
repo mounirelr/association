@@ -21,4 +21,6 @@ public class PostSendDTO {
     private String user;
     private LocalDate date;
     private String pieceJoint;
+    private Long likes;
+    private Long userId;
 }

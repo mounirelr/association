@@ -1,5 +1,6 @@
 package ma.association.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,10 +32,10 @@ public class Evenement {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-    @JsonIgnore
+    @JsonBackReference(value = "user-event")
     private User owner;
 
-    @ManyToMany(mappedBy = "participatingEvents")
+    @ManyToMany(mappedBy = "participatingEvents", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<User> participants = new ArrayList<>();
 

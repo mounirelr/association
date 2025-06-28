@@ -1,4 +1,4 @@
-import { Link,Outlet ,useLocation  } from "react-router-dom"
+import { Link,Outlet ,useLocation,useNavigate  } from "react-router-dom"
 import {useEffect, useState} from "react"
 
 import "../../Styles/Layout.css"
@@ -7,7 +7,7 @@ import SearchBar from "../../Components/SearchBar";
 
 
 export default  function Layout(){
-   
+   const navigate = useNavigate()
     const [inputSearch, setInputSearch] = useState("");
 
     const [connectedUser,setConnectedUser] =useState({})
@@ -24,6 +24,12 @@ export default  function Layout(){
       setConnectedUser(user)
     }
 
+    const handleLogout = ()=>{
+     localStorage.removeItem("connectedUser")
+     navigate("/")
+
+    }
+
     useEffect(()=>{
       getConnectedUser()
     },[])
@@ -37,13 +43,15 @@ export default  function Layout(){
     </div>
     <ul>
        
-        
-            <li >
+         {connectedUser.role==="Admin" && (
+          <li >
                 <Link to="/" >
                     <i className="fas fa-tachometer-alt"></i>
                     <span>Aperçu</span>
                 </Link>
             </li>
+         )}
+            
 
             <li className={path.toLowerCase() === "post" ? "active" : ""}>
             <Link to="/post" >
@@ -53,9 +61,9 @@ export default  function Layout(){
             </li>
 
             <li className={path.toLowerCase() === "disscution" ? "active" : ""}>
-            <Link to="/disscution" >
+            <Link to="/discussion" >
                     <i className="fa-regular fa-comments"></i>
-                    <span>Disscution</span>
+                    <span>Discussion</span>
                 </Link>
             </li>
 
@@ -68,13 +76,15 @@ export default  function Layout(){
                     <span>Evenement</span>
                 </Link>
             </li>
-
+          {connectedUser.role==="Admin" &&(
             <li className= {path.toLowerCase() === "members" ? "active" : "" }>
             <Link to="/members" >
                     <i className="fa-regular fa-circle-user"></i>
                 <span>Membres</span>
             </Link>
         </li>
+          )}
+            
 
         
         
@@ -87,11 +97,12 @@ export default  function Layout(){
         </li>
 
 
-        <li className="logout">
-       
+        <li className="logout" onClick={handleLogout}>
+        
 
                 <i className="fa-solid fa-right-from-bracket"></i>
                 <span>Deconnecter</span>
+                
             
         </li>
     </ul>

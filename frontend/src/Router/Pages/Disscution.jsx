@@ -14,6 +14,14 @@ import { useEffect, useState } from "react";
 export default function Disscution() {
     const [disscutions ,setDisscutionList] = useState([])
     const { inputSearch } = useOutletContext();
+    const [connectedUser,setConnectedUser]=useState([])
+
+  const getConnectedUser=()=>{
+    const user = JSON.parse(localStorage.getItem("connectedUser"));
+    if (user) {
+        setConnectedUser(user);
+}
+}
 
 
 const getDisscution = async () => {
@@ -34,6 +42,7 @@ const getDisscution = async () => {
 
 
   useEffect(()=>{
+    getConnectedUser()
     getDisscution()
   },[])
  
@@ -46,7 +55,10 @@ const getDisscution = async () => {
   return (
     <div className="disscussion-container">
     
-      <CreateDisscutionCard />
+     {connectedUser.role!=="Admin" &&(
+
+     <CreateDisscutionCard />
+     )} 
 
      
       {displayDisscution()}

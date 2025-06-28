@@ -5,6 +5,7 @@ import ma.association.DTO.PostDTO;
 import ma.association.DTO.PostSendDTO;
 import ma.association.model.Commentaire;
 import ma.association.model.Post;
+import ma.association.model.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface PostService {
     public ResponseEntity<Post> update(Post post);
 
     public ResponseEntity<String> addComment(NewComment newComment);
+
+    public ResponseEntity<String> likePost(Long postId, Long userId);
 
 }

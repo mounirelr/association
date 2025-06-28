@@ -59,6 +59,7 @@ export default function Profil() {
         if(response.ok){
             console.log("user Updated")
             localStorage.setItem("connectedUser",JSON.stringify({ ...userDetails, ...updatedUser }))
+            
            
         }
 
@@ -67,7 +68,7 @@ export default function Profil() {
         console.log(error)
        }
 
-    setUserDetails(userDetails);
+    setUserDetails(JSON.parse(localStorage.getItem("connectedUser")));
     
     setEditMode(false);
   };
