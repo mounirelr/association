@@ -3,11 +3,9 @@ package ma.association.controller;
 import ma.association.DTO.DisscutionDTO;
 import ma.association.DTO.DisscutionSendDTO;
 import ma.association.DTO.NewComment;
-import ma.association.model.Disscution;
 import ma.association.service.DisscutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,5 +43,10 @@ public class DisscutionController {
     @PutMapping("updateMessageDisscution/{id}")
     public ResponseEntity<String> updateMessageDisscution(@PathVariable Long id, @RequestBody NewComment newComment) {
         return disscutionService.updateMessageDisscution(id, newComment);
+    }
+
+    @GetMapping("/discussionsUser")
+    public List<DisscutionSendDTO> getDisscutionsUser(@RequestParam Long userId ) {
+        return disscutionService.getDisscutionsUser(userId);
     }
 }

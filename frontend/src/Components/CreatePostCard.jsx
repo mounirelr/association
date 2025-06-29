@@ -70,7 +70,9 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
     const formData = new FormData();
     formData.append("titre" , titleRef.current.value.trim())
     formData.append( "content" ,ContentRef.current.value.trim())
-    formData.append( "pieceJoint", imageRef.current.files[0])
+    if (imageRef.current.files[0]) {
+      formData.append("pieceJoint", imageRef.current.files[0]);
+    }
     formData.append( "userId" , connectedUser.id)
     
 

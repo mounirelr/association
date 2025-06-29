@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function PostCard({ post,editPost,fetchPosts }) {
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState("");
+  const [pathName,setPathName] = useState()
 
   const [connectedUser,setConnectedUser]=useState([])
    const getConnectedUser=()=>{
@@ -39,7 +40,7 @@ export default function PostCard({ post,editPost,fetchPosts }) {
     e.preventDefault();
     const postId = e.currentTarget.dataset.id;
     try {
-      const response = await fetch(`http://localhost:8080/deletePost?postId=${postId}`, {
+      const response = await fetch(`http://localhost:8080/deletePost/${postId}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -115,6 +116,9 @@ export default function PostCard({ post,editPost,fetchPosts }) {
 
   useEffect(()=>{
     getConnectedUser()
+    const path = window.location.pathname;
+    const lastPart = path.substring(path.lastIndexOf('/') + 1);
+    setPathName(lastPart)
   },[])
 
   return (
@@ -130,7 +134,7 @@ export default function PostCard({ post,editPost,fetchPosts }) {
         </div>
 
         <div className="post-actions">
-          {connectedUser.role==="Membre" && connectedUser.id===post.userId &&(
+          {connectedUser.role==="Membre" && connectedUser.id===post.userId && pathName!=="Profil" &&(
 
           <button className="post-btn edit-btn" data-id={post.id} onClick={handleEditPost}>Modifier</button>
           )}
@@ -152,13 +156,16 @@ export default function PostCard({ post,editPost,fetchPosts }) {
       <div className="post-content">
         <h3>{post.titre}</h3>
         <p>{post.content}</p>
-        <img
-          src={"http://localhost:8080/uploads/" + post.pieceJoint}
-          alt="post"
-          className="post-image"
-          width={150}
-          height={300}
-        />
+        { post.pieceJoint && (
+ <img
+ src={"http://localhost:8080/uploads/" + post.pieceJoint}
+ alt="post"
+ className="post-image"
+ width={150}
+ height={300}
+/>
+        )}
+       
       </div>
 
       <div className="post-actions">

@@ -55,7 +55,7 @@ const getDisscution = async () => {
   return (
     <div className="disscussion-container">
     
-     {connectedUser.role!=="Admin" &&(
+     {connectedUser.role==="Membre" &&(
 
      <CreateDisscutionCard />
      )} 

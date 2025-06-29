@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../Styles/profil.css";
+import PostCard from "../../Components/PostCard";
+import DissuctionCard from "../../Components/DisscutionCard";
 
 export default function Profil() {
   const [userDetails, setUserDetails] = useState({});
@@ -11,8 +13,14 @@ export default function Profil() {
     passwordVerify: ""
   });
 
+  const [switchButton,setswitchButton] = useState(true)
+  const [postList,setPostList] = useState([])
+  const [discussionList,setDiscussionList]=useState([])
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("connectedUser"));
+    fetchPosts()
+    fetchDiscussion()
     if (user) {
       setUserDetails(user);
       setFormData({
@@ -72,6 +80,44 @@ export default function Profil() {
     
     setEditMode(false);
   };
+
+  
+
+  const fetchPosts =  async()=>{
+    const userId= JSON.parse(localStorage.getItem("connectedUser")).id
+
+    const response = await fetch(`http://localhost:8080/postsUser?userId=${userId}`);
+    const data = await response.json();
+    console.log(data)
+    setPostList(data);
+  }
+
+
+  const fetchDiscussion =  async()=>{
+    const userId= JSON.parse(localStorage.getItem("connectedUser")).id
+
+    const response = await fetch(`http://localhost:8080/discussionsUser?userId=${userId}`);
+    const data = await response.json();
+    console.log(data)
+    setDiscussionList(data);
+  }
+
+
+  const displayPost = () => {
+      
+    
+      return postList.map((post, key) => (
+        <PostCard post={post} key={key} />
+      ));
+    };
+
+    const displayDisscution = ()=>{
+       
+        return  discussionList.map((diss,key)=>{
+          return   <DissuctionCard diss={diss} key={key} />
+        })
+      }
+
 
   return (
     <div className="profile-page">
@@ -167,6 +213,23 @@ export default function Profil() {
           )}
         </div>
       </div>
+      <div className="profilbtnAction-row">
+      <button className="profilbtnAction-btn profilbtnAction-primary" onClick={() => setswitchButton(prev => !prev)}
+      >Mes posts</button>
+      <button className="profilbtnAction-btn profilbtnAction-secondary" onClick={() => setswitchButton(prev => !prev)}
+      >Mes discussions</button>
     </div>
+    <div className="contanierCardPost">
+        <br />
+    {switchButton===true &&(
+        displayPost()
+    )}
+    {switchButton===false &&(
+        displayDisscution()
+    )}
+    </div>
+    
+    </div>
+    
   );
 }

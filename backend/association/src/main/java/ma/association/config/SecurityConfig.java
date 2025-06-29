@@ -39,6 +39,8 @@ public class SecurityConfig   {
                         .requestMatchers("/post").permitAll()
                         .requestMatchers("/updatePost").permitAll()
                         .requestMatchers("/posts").permitAll()
+                        .requestMatchers("/postsUser/**").permitAll()
+                        .requestMatchers("/discussionsUser/**").permitAll()
                         .requestMatchers("/likePost/**").permitAll()
                         .requestMatchers("/addPostComment").permitAll()
                         .requestMatchers("/deleteComment/**").permitAll()

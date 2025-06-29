@@ -58,6 +58,11 @@ public class DisscutionServiceImpl implements DisscutionService {
 
     }
 
+    public List<DisscutionSendDTO> getDisscutionsUser(Long idUser){
+        return getAllDisscutions().stream().filter(e->e.getUserId().equals(idUser)).toList();
+
+    }
+
     @Override
     public ResponseEntity<Disscution> getDisscutionUser(Long id) {
         return null;

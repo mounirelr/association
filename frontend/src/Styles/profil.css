@@ -119,5 +119,39 @@
   }
   
 
-
+  .profilbtnAction-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  
+  .profilbtnAction-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .profilbtnAction-primary {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .profilbtnAction-primary:hover {
+    background-color: #45a049;
+  }
+  
+  .profilbtnAction-secondary {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .profilbtnAction-secondary:hover {
+    background-color: #45a049;
+  }
+  
   

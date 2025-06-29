@@ -20,6 +20,7 @@ public interface DisscutionService {
     ResponseEntity<String> addMessage(NewComment newCommentaire);
     ResponseEntity<String> deleteMessageDisscution(Long id);
     ResponseEntity<String> updateMessageDisscution(Long idMessage,NewComment newComment);
+    List<DisscutionSendDTO> getDisscutionsUser(Long idUser);
 
 
 }

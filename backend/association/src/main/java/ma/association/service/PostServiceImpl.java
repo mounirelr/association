@@ -45,32 +45,30 @@ public class PostServiceImpl implements PostService {
     @Override
     public ResponseEntity<String> save(PostDTO newPost) {
         try {
-            Path uploadPath =
-                    Paths.get(uploadDir).toAbsolutePath().normalize();
-            Files.createDirectories(uploadPath);
-            MultipartFile file = newPost.getPieceJoint();
-            if (file == null || file.isEmpty()) {
-                return ResponseEntity.badRequest().body("File is required");
-            }
-
-            String fileName = StringUtils.cleanPath(
-                    UUID.randomUUID() + "_" + file.getOriginalFilename()
-            );
-            if (fileName.contains("..")) {
-                return ResponseEntity.badRequest().body("Invalid file name");
-            }
-
-            Path targetLocation = uploadPath.resolve(fileName);
-            file.transferTo(targetLocation);
-
-
             Post post = new Post();
+            MultipartFile file = newPost.getPieceJoint();
+            if (file != null && !file.isEmpty()) {
+                Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+                Files.createDirectories(uploadPath);
+
+                String fileName = StringUtils.cleanPath(UUID.randomUUID() + "_" + file.getOriginalFilename());
+                if (fileName.contains("..")) {
+                    return ResponseEntity.badRequest().body("Invalid file name");
+                }
+
+                Path targetLocation = uploadPath.resolve(fileName);
+                file.transferTo(targetLocation);
+                post.setPieceJoint(fileName);
+            }
+
+
+
             post.setTitle(newPost.getTitre());
             post.setContent(newPost.getContent());
             post.setDate(LocalDate.now());
             post.setEtat(newPost.getEtat());
             post.setOwner(userRepository.getById(newPost.getUserId()));
-            post.setPieceJoint(fileName);
+
             postRepository.save(post);
             return ResponseEntity.ok("Post ajoute avec success");
 
@@ -118,6 +116,11 @@ public class PostServiceImpl implements PostService {
                 .toList();
 
         return posts;
+    }
+
+
+    public List<PostSendDTO> findPosByUsertId(Long userId){
+       return findAll().stream().filter(p-> p.getUserId().equals(userId)).toList();
     }
 
     @Override

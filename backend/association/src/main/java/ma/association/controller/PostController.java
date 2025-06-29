@@ -56,4 +56,9 @@ public class PostController {
         return postService.likePost(postId,userId);
     }
 
+    @GetMapping("/postsUser")
+    public List<PostSendDTO> findPostsByUsertId(@RequestParam Long userId){
+        return postService.findPosByUsertId(userId);
+    }
+
 }

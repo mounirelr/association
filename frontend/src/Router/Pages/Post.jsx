@@ -11,6 +11,7 @@ export default  function Post(){
   const [connectedUser,setConnectedUser]=useState([])
   const [editClicked,setEditClicked] = useState(false)
   const [editedPost,setEditedPost] = useState([])
+ 
 
   const getConnectedUser=()=>{
     const user = JSON.parse(localStorage.getItem("connectedUser"));
@@ -76,18 +77,23 @@ const getEditedPost=(postId)=>{
   useEffect(()=>{
     getConnectedUser()
     fetchPosts()
+   
   },[])
 
   return <>
   <div className="contanierCardPost">
-    {connectedUser.role==="Membre" && editClicked===true ?(
-       <CreatePostCard editedPost={editedPost} fetchPosts={fetchPosts} clearEditPost={clearEditPost} />
-    ) :(
-      <CreatePostCard fetchPosts={fetchPosts} />
-    )
+  {connectedUser.role === "Membre" && (
+  editClicked ? (
+    <CreatePostCard 
+      editedPost={editedPost} 
+      fetchPosts={fetchPosts} 
+      clearEditPost={clearEditPost} 
+    />
+  ) : (
+    <CreatePostCard fetchPosts={fetchPosts} />
+  )
+)}
 
-    
-    }
   {displayPost()}
   </div>
 
