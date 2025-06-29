@@ -17,7 +17,7 @@ public class PostDTO {
     private String titre;
     private String content;
     private String etat = "Active";
-        private Long userId;
+    private Long userId;
 
     private MultipartFile pieceJoint;
 }

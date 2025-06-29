@@ -24,6 +24,13 @@ public class PostController {
         return postService.save(newPost);
 
     }
+
+    @PutMapping (value = "/updatePost" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> updatePost(@ModelAttribute PostDTO updatedPost) {
+        return postService.update(updatedPost);
+    }
+
+
     @GetMapping(value = "/posts")
     public List<PostSendDTO> getAllPosts() {
         return postService.findAll();
@@ -37,6 +44,13 @@ public class PostController {
     public ResponseEntity<String> addComment(@RequestBody NewComment newComment) {
          return postService.addComment(newComment);
     }
+
+    @DeleteMapping("/deleteComment/{idComment}")
+    public ResponseEntity<String> deleteComment(@PathVariable Long idComment) {
+        return postService.deleteComment(idComment);
+    }
+
+
     @PutMapping("/likePost/{postId}/{userId}")
     public ResponseEntity<String> likePost(@PathVariable Long postId,@PathVariable Long userId){
         return postService.likePost(postId,userId);

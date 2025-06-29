@@ -88,8 +88,11 @@
   }
   
   .like-btn {
-    background-color: #7ed957;
+    background-color: #28a745;
     color: white;
+  }
+  .like-btn:hover{
+    background-color: #6ac74a;
   }
   
   .comment-btn {

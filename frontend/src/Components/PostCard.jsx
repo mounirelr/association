@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post,editPost,fetchPosts }) {
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState("");
 
@@ -26,6 +26,7 @@ export default function PostCard({ post }) {
       })
       
      if(response.ok){
+      fetchPosts()
       console.log("like add successfully")
      }
     }catch(err){
@@ -42,6 +43,7 @@ export default function PostCard({ post }) {
         method: "DELETE",
       });
       if (response.ok) {
+        fetchPosts()
         console.log("Deleted successfully");
        
       }
@@ -55,8 +57,22 @@ export default function PostCard({ post }) {
   };
 
 
-  const handleDeleteComment=()=>{
-    console.log("yes")
+  const handleDeleteComment= async(idComment)=>{
+    console.log("yes ",idComment)
+      const response = await fetch(`http://localhost:8080/deleteComment/${idComment}`,{
+        method:"DELETE",
+
+      })
+      if(response.status === 200){
+        fetchPosts()
+        console.log("commentaire supprimer avec success")
+      
+    }
+    else{
+      console.log("erreur dans la suppression du commentaire ")
+  }
+
+    
   }
 
   const handleSendComment =  async(e) => {
@@ -76,6 +92,7 @@ export default function PostCard({ post }) {
 
     })
     if(response.status === 200){
+      fetchPosts()
       console.log("message ajoute avec success")
     
   }
@@ -86,6 +103,15 @@ export default function PostCard({ post }) {
     setCommentText(""); 
   
   };
+
+ 
+
+  const handleEditPost = (e)=>{
+    e.preventDefault()
+    const postId = e.currentTarget.dataset.id
+    editPost(postId)
+   
+  }
 
   useEffect(()=>{
     getConnectedUser()
@@ -104,18 +130,18 @@ export default function PostCard({ post }) {
         </div>
 
         <div className="post-actions">
-          {connectedUser.role==="Memeber" && connectedUser.id===post.userId &&(
+          {connectedUser.role==="Membre" && connectedUser.id===post.userId &&(
 
-          <button className="post-btn edit-btn">Edit</button>
+          <button className="post-btn edit-btn" data-id={post.id} onClick={handleEditPost}>Modifier</button>
           )}
-          {(connectedUser.role!=="Memeber" || connectedUser.id===post.userId )&& (
+          {(connectedUser.role!=="Membre" || connectedUser.id===post.userId )&& (
            
             <button
             className="post-btn delete-btn"
             data-id={post.id}
             onClick={handleDelete}
           >
-            Delete
+            Supprimer
           </button>
           
           )}
@@ -136,13 +162,13 @@ export default function PostCard({ post }) {
       </div>
 
       <div className="post-actions">
-       {connectedUser.role==="Memeber" ? (
+       {connectedUser.role==="Membre" ? (
          <button onClick={handleClickLike} className="like-btn"  data-id={post.id}>
          👍 {post.likes} Like
        </button>
-       ):  <button  className="like-btn"  data-id={post.id}>
+       ): (<button  className="like-btn"  >
        👍 {post.likes} Like
-     </button>}
+     </button> )}
         <button onClick={handleToggleComment} className="comment-btn">
           💬 Comment
         </button>
@@ -151,7 +177,7 @@ export default function PostCard({ post }) {
      
       {showComments && (
   <div className="comment-section">
-    {connectedUser.role==="Memeber"  && (
+    {connectedUser.role==="Membre"  && (
      <><textarea
               className="comment-input"
               placeholder="Ecrire un commentaire"
@@ -181,7 +207,7 @@ export default function PostCard({ post }) {
       </div>
       <div className="rightPostComment">
       <span className="comment-date">{comment.date}</span>
-      {(connectedUser.role!=="Memeber" || connectedUser.id===post.userId) &&(
+      {(connectedUser.role!=="Membre" || connectedUser.id===post.userId) &&(
         <button
         className="delete-comment-btn"
         onClick={() => handleDeleteComment(comment.id)}

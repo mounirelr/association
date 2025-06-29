@@ -156,7 +156,7 @@ export default function EventCard({event ,getEvents,editEventTrigger,displayEven
         <span className="eventCard__location">{event.placeAdresse}</span>
         <span className="eventCard__spots">Place limitee</span>
       </div>
-      {connectedUser.role==="Memeber" ? (
+      {connectedUser.role==="Membre" ? (
         <div className="eventCard__buttons">
         <button className="eventCard__button eventCard__button--register"  data-id={event.id} onClick={handleRegisterEvent}>S'inscrire</button>
         <button className="eventCard__button eventCard__button--more"   data-id={event.id} onClick={handlePlusInfo}>Plus d'information</button>
@@ -172,7 +172,7 @@ export default function EventCard({event ,getEvents,editEventTrigger,displayEven
 
                <div className="eventCard__buttonsModerator">
                         <button className="eventCard__button eventCard__button--register" data-id={event.id} onClick={handleDeleteEvent}>Supprimer</button>
-                        {connectedUser.role==="Memeber" && (
+                        {connectedUser.role==="Moderateur" && (
 
                             <button className="eventCard__button eventCard__button--more" data-id={event.id} onClick={handeEditEvent}>Modifier</button>
                         )}

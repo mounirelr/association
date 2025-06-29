@@ -9,6 +9,8 @@ export default  function Post(){
 
   const [postList, setPostList] = useState([]);
   const [connectedUser,setConnectedUser]=useState([])
+  const [editClicked,setEditClicked] = useState(false)
+  const [editedPost,setEditedPost] = useState([])
 
   const getConnectedUser=()=>{
     const user = JSON.parse(localStorage.getItem("connectedUser"));
@@ -43,12 +45,28 @@ export default  function Post(){
     });
   
     return SearchedPostList.map((post, key) => (
-      <PostCard post={post} key={key} />
+      <PostCard post={post} key={key} editPost={editPost} fetchPosts={fetchPosts} />
     ));
   };
   
 
+const editPost =(postId)=>{
+  console.log("edit is clicked")
+  setEditClicked(true)
+  const post =getEditedPost(postId)
+  setEditedPost(post)
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
+const getEditedPost=(postId)=>{
+ 
+  return postList.filter((p)=>{
+    
+    return p.id===parseInt(postId)
+  }
+  )[0]
+ 
+}
 
 
 
@@ -59,10 +77,14 @@ export default  function Post(){
 
   return <>
   <div className="contanierCardPost">
-    {connectedUser.role==="Memeber" &&(
+    {connectedUser.role==="Membre" && editClicked ?(
+       <CreatePostCard editedPost={editedPost} fetchPosts={fetchPosts} />
+    ) :(
+      <CreatePostCard fetchPosts={fetchPosts} />
+    )
 
-     <CreatePostCard />
-    )}
+    
+    }
   {displayPost()}
   </div>
 

@@ -151,9 +151,62 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public ResponseEntity<Post> update(Post post) {
-        return null;
+    public ResponseEntity<String> update(PostDTO updatedPost) {
+        System.out.println("updatePost is called");
+        Post post = postRepository.findById(updatedPost.getId()).orElse(null);
+        if (post != null) {
+            try {
+                post.setTitle(updatedPost.getTitre());
+                post.setContent(updatedPost.getContent());
+                post.setDate(LocalDate.now());
+                post.setEtat(updatedPost.getEtat());
+
+                MultipartFile file = updatedPost.getPieceJoint();
+                if (file != null && !file.isEmpty()) {
+                    Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+                    Files.createDirectories(uploadPath);
+
+                    String fileName = StringUtils.cleanPath(UUID.randomUUID() + "_" + file.getOriginalFilename());
+                    if (fileName.contains("..")) {
+                        return ResponseEntity.badRequest().body("Invalid file name");
+                    }
+
+                    Path targetLocation = uploadPath.resolve(fileName);
+                    file.transferTo(targetLocation);
+                    post.setPieceJoint(fileName);
+                }
+                postRepository.save(post);
+                return ResponseEntity.ok("Post updated successfully");
+
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        }
+        return ResponseEntity.badRequest().body("Error updating post");
     }
+
+
+
+
+    public ResponseEntity<String> deleteComment(Long idComment){
+        System.out.println("deleteComment called with id = " + idComment);
+        Commentaire commentaire = commentaireRepository.findById(idComment).orElse(null);
+        if(commentaire != null) {
+            commentaireRepository.delete(commentaire);
+            System.out.println("Comment deleted from DB");
+            return ResponseEntity.ok("Comment deleted");
+        }
+        System.out.println("Comment not found in DB");
+        return ResponseEntity.badRequest().body("Error deleting comment");
+    }
+
+
+
+
+
+
+
+
 
     public ResponseEntity<String> likePost(Long postId,Long userId){
         Post post = postRepository.findById(postId).orElse(null);

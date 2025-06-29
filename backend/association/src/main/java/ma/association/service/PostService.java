@@ -16,10 +16,12 @@ public interface PostService {
     public ResponseEntity<String> save(PostDTO newPost);
     public List<PostSendDTO> findAll();
     public ResponseEntity<String> deleteById(Long id);
-    public ResponseEntity<Post> update(Post post);
+    public ResponseEntity<String> update(PostDTO updatedPost);
 
     public ResponseEntity<String> addComment(NewComment newComment);
 
     public ResponseEntity<String> likePost(Long postId, Long userId);
+
+    public ResponseEntity<String> deleteComment(Long idComment);
 
 }

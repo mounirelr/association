@@ -60,8 +60,8 @@ export default function CreateEventCard({ getEvents, formEdit, editedEvent ,rese
                 setShowForm(false);
                 getEvents();
             } else {
-                const errorData = await response.json();
-                setErrorList([errorData.message || "Failed to add event"]);
+                const errorData = await response.text();
+                setErrorList([errorData || "Failed to add event"]);
             }
         } catch (error) {
             console.error("Error:", error);

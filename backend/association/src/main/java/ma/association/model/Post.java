@@ -32,7 +32,7 @@ public class Post {
     private User owner;
 
 
-    @OneToMany(mappedBy = "post" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post" , cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "comment-post")
     private List<Commentaire> commentaire = new ArrayList<>();
 
