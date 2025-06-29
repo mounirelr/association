@@ -22,8 +22,8 @@ public class Commentaire {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "userId" , nullable = false)
     @JsonIgnore
     private User user;
 

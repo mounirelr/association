@@ -1,6 +1,6 @@
 import { useState  , useRef, useEffect} from "react";
 
-export default function CreateDisscutionCard() {
+export default function CreateDisscutionCard({getDisscution}) {
   const [showAddDiscussionForm, setShowAddDiscussionForm] = useState(false);
   const newDiscussionTitle = useRef()
   const newDiscussionDescription = useRef()
@@ -43,6 +43,7 @@ export default function CreateDisscutionCard() {
             if(response.status === 200){
                 console.log("disscution ajoute avec success")
                 setShowAddDiscussionForm(!showAddDiscussionForm)
+                getDisscution()
             }
             else{
                 console.log("erreur dans l'ajout du disscution ")

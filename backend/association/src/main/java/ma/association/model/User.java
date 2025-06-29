@@ -53,4 +53,8 @@ public class User {
     @JsonManagedReference(value = "user-post-like")
     private List<PostLike> postLikes = new ArrayList<>();
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Commentaire> commentaires = new ArrayList<>();
+
 }

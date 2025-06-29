@@ -110,11 +110,11 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<String> upgradeToModerator(Long id){
         User user = userRepository.findById(id).orElse(null);
         if(user != null){
-            if(user.getRole().equals("Memeber")){
+            if(user.getRole().equals("Membre")){
                 user.setRole("Moderateur");
             }
             else{
-                user.setRole("Memeber");
+                user.setRole("Membre");
             }
             userRepository.save(user);
         }

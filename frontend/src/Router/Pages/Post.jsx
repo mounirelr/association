@@ -25,7 +25,7 @@ export default  function Post(){
 
   const clearEditPost=()=>{
     setEditClicked(false)
-    setEditClicked([])
+    setEditedPost([])
   }
 
 

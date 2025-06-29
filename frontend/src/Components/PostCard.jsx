@@ -214,7 +214,7 @@ export default function PostCard({ post,editPost,fetchPosts }) {
       </div>
       <div className="rightPostComment">
       <span className="comment-date">{comment.date}</span>
-      {(connectedUser.role!=="Membre" || connectedUser.id===post.userId) &&(
+      {(connectedUser.role!=="Membre" || connectedUser.id===comment.userId) &&(
         <button
         className="delete-comment-btn"
         onClick={() => handleDeleteComment(comment.id)}

@@ -44,8 +44,7 @@ export default function  Members(){
           if(response.status===200){
             
 
-                const newMemberList = membersList.filter(e=>e.id !== idMember )
-                setMembersList(newMemberList)
+            fetchMembers()
             }
             else if(response.status===404){
                 console.log("Member Not Found Not Found");

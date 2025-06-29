@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-export default function DissuctionCard({diss}){
+export default function DissuctionCard({diss,getDisscution}){
    
 
     const [editedMessage, setEditedMessage] = useState('');
@@ -28,6 +28,7 @@ export default function DissuctionCard({diss}){
                 }),
             })
             if(response.ok){
+                getDisscution()
                 console.log("Message Updated")
                
             }
@@ -67,6 +68,7 @@ export default function DissuctionCard({diss}){
                 method: 'DELETE',
             })
             if(response.ok){
+                getDisscution()
                 console.log("deleted successfuly")
                
             }
@@ -87,6 +89,7 @@ export default function DissuctionCard({diss}){
             method: 'DELETE',
         })
         if(response.ok){
+            getDisscution()
             console.log("deleted successfuly")
            
         }
@@ -120,6 +123,7 @@ export default function DissuctionCard({diss}){
 
           })
           if(response.status === 200){
+            getDisscution()
             console.log("message ajoute avec success")
           
         }

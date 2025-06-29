@@ -36,7 +36,7 @@ const getDisscution = async () => {
         return  diss.title.toLowerCase().includes(inputSearch.toLowerCase())
     })
     return  disscutionToDisplay.map((diss,key)=>{
-      return   <DissuctionCard diss={diss} key={key} />
+      return   <DissuctionCard diss={diss} key={key} getDisscution={getDisscution} />
     })
   }
 
@@ -57,7 +57,7 @@ const getDisscution = async () => {
     
      {connectedUser.role==="Membre" &&(
 
-     <CreateDisscutionCard />
+     <CreateDisscutionCard  getDisscution={getDisscution}/>
      )} 
 
      

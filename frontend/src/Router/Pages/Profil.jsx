@@ -219,15 +219,19 @@ export default function Profil() {
       <button className="profilbtnAction-btn profilbtnAction-secondary" onClick={() => setswitchButton(prev => !prev)}
       >Mes discussions</button>
     </div>
-    <div className="contanierCardPost">
+    
         <br />
     {switchButton===true &&(
-        displayPost()
+        <div className="contanierCardPost">
+        {displayPost()}
+        </div>
     )}
     {switchButton===false &&(
-        displayDisscution()
+        <div className="disscussion-container">
+       { displayDisscution()}
+       </div>
     )}
-    </div>
+   
     
     </div>
     

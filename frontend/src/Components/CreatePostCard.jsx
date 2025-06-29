@@ -7,11 +7,22 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
   const [errorList, setErrorList] = useState([]);
   const [fileName, setFileName] = useState("Aucun fichier sélectionné");
   const[file,setFile] = useState()
+  
 
   const titleRef = useRef()
   const ContentRef = useRef()
    const imageRef = useRef();
    const [imageSet,setImageSet]=useState(false)
+
+
+   const clearForm = () => {
+    if (titleRef.current) titleRef.current.value = "";
+    if (ContentRef.current) ContentRef.current.value = "";
+    if (imageRef.current) imageRef.current.value = null;
+    setFileName("Aucun fichier sélectionné");
+    setFile(null);
+  };
+  
   
    const [connectedUser,setConnectedUser]=useState([])
    const getConnectedUser=()=>{
@@ -24,6 +35,10 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
 
    const handleAddPost= async(e)=>{
     e.preventDefault()
+    if (titleRef.current.value.trim().length===0) {
+      setErrorList(["Le champ titre est obligatoire."]);
+      return;
+    }
     if(editedPost){
       const formData = new FormData();
       formData.append("id",editedPost.id)
@@ -49,7 +64,7 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
 
     if (response.ok) {
       clearEditPost()
-      titleRef.current.defaultValue=""
+      clearForm() 
       fetchPosts()
         console.log("Post updated successfully");
        
@@ -84,7 +99,9 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
     });
 
     if (response.ok) {
+      clearForm() 
       fetchPosts()
+      
         console.log("Post added successfully");
        
     } else {
@@ -95,6 +112,7 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
       console.log(error)
     }
   }
+  setErrorList([]);
    }
 
   
@@ -105,10 +123,23 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
 };
    
 
-   useEffect(()=>{
-    getConnectedUser()
-    console.log("editedPost",editedPost)
-   },[editedPost])
+useEffect(() => {
+  getConnectedUser();
+
+  
+  if (editedPost && titleRef.current && ContentRef.current) {
+    titleRef.current.value = editedPost.titre || "";
+    ContentRef.current.value = editedPost.content || "";
+    setFileName(editedPost.pieceJoint || "Aucun fichier sélectionné");
+    setImageSet(false); 
+  }
+
+  
+  if (!editedPost) {
+    clearForm();
+  }
+
+}, [editedPost]);
 
 
 
@@ -125,11 +156,19 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
     </div>
   
     <div className="create-post-form">
+    {errorList.length > 0 && (
+  <ul className="error-list">
+    {errorList.map((err, idx) => (
+      <li key={idx} className="error-message">{err}</li>
+    ))}
+  </ul>
+)}
+
       <input 
         type="text" 
         placeholder="Post titre..." 
         className="post-input" 
-        defaultValue={editedPost?.titre || ""}
+       
         ref={titleRef}
        
       />
@@ -137,7 +176,7 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
       <textarea 
         placeholder="Contenu" 
         className="post-textarea" 
-        defaultValue={editedPost?.content || ""}
+       
         ref={ContentRef}
        
       ></textarea>
@@ -160,7 +199,7 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
   
   
 
-{editedPost && !imageRef.current?.files[0] && !imageSet && (
+{editedPost && editedPost.pieceJoint && !imageRef.current?.files[0] && !imageSet && (
   <img
     src={`http://localhost:8080/uploads/${editedPost.pieceJoint}`}
     alt="Image actuelle"
@@ -168,10 +207,11 @@ export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
   />
 )}
 
+
   
       
   
-      <button  className="add-post-btn" onClick={handleAddPost}>➕ {editedPost ?"Modifier" :"Ajouter"}</button>
+      <button  className="add-post-btn" onClick={handleAddPost}>➕ {editedPost ? "Modifier" :"Ajouter"}</button>
     </div>
   </div>
   

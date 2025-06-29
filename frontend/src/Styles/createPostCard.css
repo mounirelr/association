@@ -58,4 +58,15 @@
     max-height: 300px;
     object-fit: cover;
   }
+
+  .error-list {
+    margin-top: 3px;
+    padding-left: 0;
+    list-style: none;
+    color: red;
+    font-size: 0.9rem;
+  }
+  
+  
+  
   
