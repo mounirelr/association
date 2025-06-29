@@ -162,13 +162,16 @@ export default function DissuctionCard({diss}){
         >
           {showMessages ? 'Masquer les messages' : 'Afficher les messages'}
         </button>
-        <button
-          className="disscussion-btn disscussion-delete-btn"
-          data-id={diss.id}
-          onClick={handleDeleteDiscussion}
-        >
-          Supprimer Discussion
-        </button>
+       {(connectedUser.id===diss.userId || connectedUser.role==="Admin"|| connectedUser.role==="Moderateur")&& (
+ <button
+ className="disscussion-btn disscussion-delete-btn"
+ data-id={diss.id}
+ onClick={handleDeleteDiscussion}
+>
+ Supprimer Discussion
+</button>
+       )}
+       
       </div>
     </div>
 
@@ -228,7 +231,7 @@ export default function DissuctionCard({diss}){
               )}
               
               <div className="disscussion-actions">
-                {connectedUser.role!=="Admin" &&(
+                {(connectedUser.id===msg.userId) &&(
                     <button
                     className="disscussion-btn disscussion-edit-btn"
                     onClick={() => handleEdit(msg.id, msg.contenu)}
@@ -236,12 +239,15 @@ export default function DissuctionCard({diss}){
                     {isEditing === msg.id ? 'Enregistrer' : 'Modifier'}
                   </button>
                 )}
-                <button
+                {(connectedUser.id===msg.userId || connectedUser.role==="Admin"|| connectedUser.role==="Moderateur")&& (
+                    <button
                   className="disscussion-btn disscussion-delete-btn"
                   onClick={() => handleDeleteMessage(msg.id)}
                 >
                   Supprimer
                 </button>
+                )}
+                
               </div>
             </div>
           ))}

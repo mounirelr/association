@@ -13,4 +13,5 @@ public class CommentaireSendDTO {
     private String contenu;
     private LocalDate date;
     private String user;
+    private Long userId;
 }

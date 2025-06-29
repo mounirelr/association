@@ -22,7 +22,10 @@ export default  function Post(){
 
 
 
-  
+  const clearEditPost=()=>{
+    setEditClicked(false)
+    setEditClicked([])
+  }
 
 
 
@@ -77,8 +80,8 @@ const getEditedPost=(postId)=>{
 
   return <>
   <div className="contanierCardPost">
-    {connectedUser.role==="Membre" && editClicked ?(
-       <CreatePostCard editedPost={editedPost} fetchPosts={fetchPosts} />
+    {connectedUser.role==="Membre" && editClicked===true ?(
+       <CreatePostCard editedPost={editedPost} fetchPosts={fetchPosts} clearEditPost={clearEditPost} />
     ) :(
       <CreatePostCard fetchPosts={fetchPosts} />
     )

@@ -34,7 +34,7 @@ public class DisscutionServiceImpl implements DisscutionService {
 
     public List<CommentaireSendDTO> mapToCommentSend(List<Commentaire> comments){
        List<CommentaireSendDTO> allComments = comments.stream().map(cm->
-                new CommentaireSendDTO(cm.getId(),cm.getContenu(),cm.getDate(),cm.getUser().getFirstName()+" "+cm.getUser().getLastName()))
+                new CommentaireSendDTO(cm.getId(),cm.getContenu(),cm.getDate(),cm.getUser().getFirstName()+" "+cm.getUser().getLastName(),cm.getUser().getId()))
                 .sorted(Comparator.comparing(CommentaireSendDTO::getId).reversed()).toList();
        return  allComments;
 
@@ -50,7 +50,8 @@ public class DisscutionServiceImpl implements DisscutionService {
                                 d.getTitle(),
                                 d.getDescription(),
                               mapToCommentSend(d.getCommentaire()),
-                                d.getOwner().getFirstName()+" "+d.getOwner().getLastName()
+                                d.getOwner().getFirstName()+" "+d.getOwner().getLastName(),
+                              d.getOwner().getId()
                       ))
                 .toList();
         return allDisscusions;

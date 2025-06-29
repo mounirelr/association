@@ -57,23 +57,23 @@ export default function PostCard({ post,editPost,fetchPosts }) {
   };
 
 
-  const handleDeleteComment= async(idComment)=>{
-    console.log("yes ",idComment)
-      const response = await fetch(`http://localhost:8080/deleteComment/${idComment}`,{
-        method:"DELETE",
+    const handleDeleteComment= async(idComment)=>{
+      console.log("yes ",idComment)
+        const response = await fetch(`http://localhost:8080/deleteComment/${idComment}`,{
+          method:"DELETE",
 
-      })
-      if(response.status === 200){
-        fetchPosts()
-        console.log("commentaire supprimer avec success")
+        })
+        if(response.status === 200){
+          fetchPosts()
+          console.log("commentaire supprimer avec success")
+        
+      }
+      else{
+        console.log("erreur dans la suppression du commentaire ")
+    }
+
       
     }
-    else{
-      console.log("erreur dans la suppression du commentaire ")
-  }
-
-    
-  }
 
   const handleSendComment =  async(e) => {
     if (commentText.trim() === "") return;

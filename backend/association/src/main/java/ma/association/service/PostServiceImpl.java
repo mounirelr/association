@@ -93,7 +93,7 @@ public class PostServiceImpl implements PostService {
 
     public List<CommentaireSendDTO> mapToCommentSend(List<Commentaire> comments){
         List<CommentaireSendDTO> allComments = comments.stream().map(cm->
-                        new CommentaireSendDTO(cm.getId(),cm.getContenu(),cm.getDate(),cm.getUser().getFirstName()+" "+cm.getUser().getLastName()))
+                        new CommentaireSendDTO(cm.getId(),cm.getContenu(),cm.getDate(),cm.getUser().getFirstName()+" "+cm.getUser().getLastName(),cm.getUser().getId()))
                 .sorted(Comparator.comparing(CommentaireSendDTO::getId).reversed()).toList();
         return  allComments;
 

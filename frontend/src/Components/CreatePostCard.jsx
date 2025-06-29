@@ -3,7 +3,7 @@ import "../Styles/createPostCard.css"
 import profilImage from  "../profilImage.jpg"
 
 
-export default function  CreatePostCard({editedPost,fetchPosts}){
+export default function  CreatePostCard({editedPost,fetchPosts,clearEditPost}){
   const [errorList, setErrorList] = useState([]);
   const [fileName, setFileName] = useState("Aucun fichier sélectionné");
   const[file,setFile] = useState()
@@ -48,6 +48,8 @@ export default function  CreatePostCard({editedPost,fetchPosts}){
     });
 
     if (response.ok) {
+      clearEditPost()
+      titleRef.current.defaultValue=""
       fetchPosts()
         console.log("Post updated successfully");
        
@@ -140,17 +142,17 @@ export default function  CreatePostCard({editedPost,fetchPosts}){
 
 
 <div className="eventForm__fileUpload">
-                            <label htmlFor="image" className="eventForm__fileLabel">
-                                <span className="eventForm__fileButton">Choisir un fichier</span>
-                                <span className="eventForm__fileName">{fileName}</span>
-                            </label>
-                            <input
-                                    type="file"
-                                    id="image"
-                                    className="eventForm__fileInput"
-                                    ref={imageRef}
-                                    onChange={handleFileChange}
-                                    style={{ display: "none" }}
+ <label htmlFor="image" className="eventForm__fileLabel">
+ <span className="eventForm__fileButton">Choisir un fichier</span>
+ <span className="eventForm__fileName">{fileName}</span>
+ </label>
+  <input
+   type="file"
+  id="image"
+  className="eventForm__fileInput"
+  ref={imageRef}
+ onChange={handleFileChange}
+  style={{ display: "none" }}
                                 />
                         </div>
   

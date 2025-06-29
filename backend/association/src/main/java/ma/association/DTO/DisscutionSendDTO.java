@@ -16,4 +16,5 @@ public class DisscutionSendDTO {
     private String description;
     private List<CommentaireSendDTO> commentaire = new ArrayList<>();
     private String user;
+    private Long userId;
 }
